@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/rooms', 'RoomController@index');
+Route::post('/user', 'UserController@store');
+
+Route::get('/room/{room_hash}/messages', 'MessageController@show');
+Route::post('/messages', 'MessageController@store');

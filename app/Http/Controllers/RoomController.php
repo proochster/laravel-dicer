@@ -12,13 +12,11 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($room)
+    public function index()
     {
-        $room_record = Room::where('hash', $room)->firstOrFail();
+        $rooms = Room::all();
 
-        return view('room')->with([
-            'room' => $room_record
-        ]);
+        return response()->json($rooms);
     }
 
     /**
@@ -48,9 +46,13 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($room_hash)
     {
-        //
+        $room_record = Room::where('hash', $room_hash)->firstOrFail();
+
+        return view('room')->with([
+            'room' => $room_record
+        ]);
     }
 
     /**

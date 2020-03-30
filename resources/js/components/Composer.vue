@@ -1,6 +1,6 @@
 <template>
     <div class="composer form-group mt-3">
-        <textarea class="form-control" v-model="message" @keydown.enter="send" placeholder="Message"></textarea>
+        <textarea class="form-control" v-model="message" @keydown.enter="composeMessage" placeholder="Message"></textarea>
     </div>
 </template>
 
@@ -12,14 +12,14 @@ export default {
         }
     },
     methods: {
-       send(e){
+       composeMessage(e){
            e.preventDefault();
            
            if( this.message == '' ){
                return;
            }
 
-           this.$emit('send', this.message);
+           this.$emit('e-messagecomposed', this.message);
            this.message = '';
        } 
     }

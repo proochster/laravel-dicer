@@ -1,7 +1,7 @@
 <template>
     <div class="chat">
         <AddName v-if="showUserInput" @send="sendName"></AddName>
-        <Conversation :room="room_hash" :userToken="userToken" :userName="userName" :messages="messages" @new="saveNewMessage" />
+        <Conversation :room="room_hash" :userToken="userToken" :userName="userName" :messages="messages"/>
     </div>
 </template>
 
@@ -26,6 +26,13 @@
             }
         },
         mounted() {
+            
+            // Listen on channel
+            window.Echo.channel(`room-channel.${this.room_hash}`)
+                .listen('NewMessage', e => {
+                    this.saveNewMessage(e.message);
+                });
+
             axios.get(`/api/room/${this.room_hash}/messages`)
                 .then(response => {
                     this.messages = response.data;
@@ -55,12 +62,16 @@
                 }
             },
             setUserData(data){
+                this.userToken = data.hash;
+                this.userName = data.name;
                 document.cookie = `diceroom_user_token=${data.hash}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
                 document.cookie = `diceroom_user_name=${data.name}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
-                this.userToken = data.hash;
-                this.userToken = data.name;
             },
             saveNewMessage(text){
+
+                // Add local Username to the Message object
+                text.name = this.userName;
+                
                 this.messages.push(text);
             },
             getCookieValue(cname){

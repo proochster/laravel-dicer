@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <Composer @send="sendMessage"></Composer>
+        <Composer @e-messagecomposed="sendMessage"></Composer>
     </div>
 </template>
 
@@ -47,8 +47,10 @@ export default {
                 text: text
             })
             .then(response => {
-                response.data.name = this.userName; // Add local Username to the Message object
-                this.$emit('new', response.data);
+                // this.$emit('e-new', response.data);
+            })
+            .catch(function (error) {         
+                console.log(error);            
             });
         },
         scrollToBottom(){

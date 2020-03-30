@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewMessage;
 use Illuminate\Http\Request;
 use App\Message;
 use App\Room;
@@ -41,6 +42,8 @@ class MessageController extends Controller
             'toRoom' => $room->id,
             'text' => $request->text
         ]);
+
+        NewMessage::dispatch($message);
 
         return response()->json($message);
     }

@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" v-model="name" @keydown.enter="send" placeholder="Your name">
+                        <input type="text" class="form-control" v-model="name" @keydown.enter="sendName" placeholder="Your name">
                     </div>
                 </div>
                 </div>
@@ -26,7 +26,7 @@ export default {
         }
     },
     methods: {
-       send(){
+       sendName(){
            if( this.name == '' ){
                return;
            }

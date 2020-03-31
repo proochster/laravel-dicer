@@ -37,11 +37,14 @@
                 .then(response => {
                     this.messages = response.data;
                 });
+
             this.checkUser();
         },
+
         methods: {
+
             sendName(name) {
-                axios.post(`/api/user/`, {
+                axios.post(`/api/user`, {
                     'username': name
                 })
                 .then(response => {
@@ -51,7 +54,9 @@
                 .catch(function (error) {
                     console.log(error);            
                 });
+
             },
+
             checkUser(){
                 if (document.cookie.indexOf('diceroom_user_') == -1 ) {
                     this.showUserInput = true;
@@ -61,16 +66,15 @@
                     this.userName= this.getCookieValue('diceroom_user_name');
                 }
             },
+
             setUserData(data){
                 this.userToken = data.hash;
                 this.userName = data.name;
                 document.cookie = `diceroom_user_token=${data.hash}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
                 document.cookie = `diceroom_user_name=${data.name}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
             },
-            saveNewMessage(text){
 
-                // Add local Username to the Message object
-                text.name = this.userName;
+            saveNewMessage(text){
                 
                 this.messages.push(text);
             },

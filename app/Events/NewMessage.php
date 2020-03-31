@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\Message;
 use App\Room;
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -35,12 +36,20 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        // Fetch Room the message was sent to
         $room = Room::where('id', $this->message->toRoom)->firstOrFail();
+
+        // Create a new Public Channel with Room hash in the name
         return new Channel('room-channel.'.$room->hash);
     }
 
     public function broadcastWith()
     {
+
+        $user = User::where('id', $this->message->from)->firstOrFail();
+
+        $this->message->name = $user->name;
+
         return [ "message" => $this->message ];
     }
 }

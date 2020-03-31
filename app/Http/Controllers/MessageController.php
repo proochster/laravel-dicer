@@ -43,6 +43,9 @@ class MessageController extends Controller
             'text' => $request->text
         ]);
 
+        // Send back User hash and name
+        $message->name = $user->name;
+        
         NewMessage::dispatch($message);
 
         return response()->json($message);

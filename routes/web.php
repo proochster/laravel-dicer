@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('/room/{room_hash}', 'RoomController@show');
+
+Route::get('/clear-cache', function() {
+    $clearcache = Artisan::call('cache:clear');
+    echo "Cache cleared. \r\n";
+    $setCache = Artisan::call('config:cache');
+    echo "Cache configured. \r\n";
+    // $dump = Artisan::call('dump-autoload'); // Doesn't work in Laravel >= 5.0
+    // echo "dump-autoload complete. \n";
+});

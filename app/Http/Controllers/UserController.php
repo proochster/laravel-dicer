@@ -18,16 +18,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+  
         Validator::make($request->all(), [
             'username' => 'regex:/^[a-zA-Z0-9\s]+$/'
         ])->validate();
-
-        // if ($validator->fails()) {
-
-        //     return "failed";
-        
-        // }
 
         $newUser = User::create([
             'name' => $request->username,

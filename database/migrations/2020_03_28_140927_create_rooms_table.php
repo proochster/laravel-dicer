@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('name');
-            $table->text('hash')->unique();
+            $table->string('hash')->unique();
         });
     }
 

@@ -16,3 +16,9 @@ Chat room messages
 ```
 /api/room/{room_hash}/messages
 ```
+
+## Project commands
+
+```
+php artisan serve
+```

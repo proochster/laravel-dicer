@@ -1,5 +1,5 @@
 <template>
-    <div class="composer form-group mt-3">
+    <div class="composer form-group mt-3 mb-0">
         <textarea class="form-control" v-model="message" @keydown.enter="composeMessage" placeholder="Message"></textarea>
     </div>
 </template>

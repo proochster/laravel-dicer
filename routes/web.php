@@ -19,12 +19,14 @@ Route::get('/', function () {
 });
 
 Route::get('/room/{room_hash}', 'RoomController@show');
-
-Route::get('/clear-cache', function() {
-    $clearcache = Artisan::call('cache:clear');
-    echo "Cache cleared. \r\n";
-    $setCache = Artisan::call('config:cache');
-    echo "Cache configured. \r\n";
-    // $dump = Artisan::call('dump-autoload'); // Doesn't work in Laravel >= 5.0
-    // echo "dump-autoload complete. \n";
+Route::get('/room', function(){
+    return redirect('/');
 });
+Route::post('/room', 'RoomController@store')->name('create-room');
+
+// Route::get('/clear-cache', function() {
+//     $clearcache = Artisan::call('cache:clear');
+//     echo "Cache cleared. \r\n";
+//     $setCache = Artisan::call('config:cache');
+//     echo "Cache configured. \r\n";
+// });

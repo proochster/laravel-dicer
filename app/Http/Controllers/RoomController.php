@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 
 class RoomController extends Controller
 {
@@ -24,10 +26,10 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     return view('create-room');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -37,7 +39,25 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'roomName' => 'required|min:3|max:30'
+        ]);
+
+        $room = Room::create([
+            'name' => $request->roomName,
+            'hash' => Str::random(6)
+        ]);
+
+        $room->save();
+
+        // return $room;
+        // $cookie = Cookie::make('ltest', 'lvalue');
+        
+        // return view('room-created')->withCookie($cookie);
+        return view('room-created')->with([
+            'room_name' => $room->name,
+            'room_hash' => $room->hash
+        ]);
     }
 
     /**

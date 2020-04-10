@@ -10,8 +10,8 @@
                     <h2 class="text-success">{{ $room_name }}</h2>
                     <p>room created</p>
                     <p>Share this url with your team</p>
-                    <input type="text" class="form-control mb-2 mr-2 border-success" value="<?php echo url()->current(); ?>/{{ $room_hash }}">
-                    <br>
+                    <input type="text" class="bg-light form-control mb-2 mr-2 text-center" value="<?php echo url()->current(); ?>/{{ $room_hash }}">
+                    <hr>
                     <a href="<?php echo url()->current(); ?>/{{ $room_hash }}" class="btn btn-primary w-100">Go the room</a>
                 </div>                
             </div>

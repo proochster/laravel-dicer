@@ -1,7 +1,7 @@
 <template>
     <div class="chat">
         <AddName v-if="showUserInput" @send="sendName"></AddName>
-        <Conversation :room="room_hash" :userToken="userToken" :userName="userName" :messages="messages"/>
+        <Conversation :room="room_hash" :userID="userID" :userToken="userToken" :userName="userName" :messages="messages"/>
     </div>
 </template>
 
@@ -23,22 +23,31 @@
                 showUserInput: true,
                 userToken: '',
                 userName: '',
+                userID: 0
             }
         },
         mounted() {
-            
-            // Listen on channel
+
+            this.checkUser();
+
+            /**
+             * Listens on channel {room_hash}
+             * 
+             * Returns: id, from, toRoom, text, created_at, updated_at, name
+             */
             window.Echo.channel(`room-channel.${this.room_hash}`)
                 .listen('NewMessage', e => {
                     this.saveNewMessage(e.message);
                 });
 
+            /**
+             * Gets all messages from Laravel API
+             */
             axios.get(`/api/room/${this.room_hash}/messages`)
                 .then(response => {
                     this.messages = response.data;
                 });
-
-            this.checkUser();
+           
         },
 
         methods: {
@@ -59,24 +68,31 @@
 
             checkUser(){
                 if (document.cookie.indexOf('diceroom_user_') == -1 ) {
+
                     this.showUserInput = true;
+
                 } else {
+
                     this.showUserInput = false;
                     this.userToken = this.getCookieValue('diceroom_user_token');
-                    this.userName= this.getCookieValue('diceroom_user_name');
+                    this.userName = this.getCookieValue('diceroom_user_name');
+                    this.userID = Number(this.getCookieValue('diceroom_user_ID'));
+
                 }
             },
 
             setUserData(data){
                 this.userToken = data.hash;
                 this.userName = data.name;
+                this.userID = data.id;
                 document.cookie = `diceroom_user_token=${data.hash}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
                 document.cookie = `diceroom_user_name=${data.name}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
+                document.cookie = `diceroom_user_ID=${data.id}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
             },
 
-            saveNewMessage(text){
+            saveNewMessage(m){
                 
-                this.messages.push(text);
+                this.messages.push(m);
             },
             getCookieValue(cname){
                 var name = cname + "=";

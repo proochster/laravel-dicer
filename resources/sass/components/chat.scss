@@ -11,6 +11,18 @@
 
     li{
         display: block;
+
+        .message{
+            background: $light;
+        }
+    
+        &.self{
+            text-align: right;
+
+            .message{
+                background: $info;
+            }
+        }
     }
 }
 
@@ -28,6 +40,6 @@
     overflow-y: scroll;
 }
 
-.composer{
+// .composer{
     
-}
+// }

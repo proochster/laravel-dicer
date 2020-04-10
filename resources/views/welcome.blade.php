@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="jumbotron text-center">
-    <div class="w-50 mx-auto">
+    <div class="w-50-md mx-auto">
         
         <p>Welcome to</p>
         <h1 class="display-4 text-primary">DiceChat</h1>

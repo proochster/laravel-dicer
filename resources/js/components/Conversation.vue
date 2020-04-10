@@ -2,9 +2,9 @@
     <div class="conversation">
         <div class="scroll" ref="scroll">
             <div class="scroll-content">
-                <ul>
-                    <li v-for="message in messages" :key="message.id">
-                        <div class="message rounded bg-light px-3 py-1 mb-2">
+                <ul class="mr-3">
+                    <li v-for="message in messages" :key="message.id" :class="{'self': userID == message.from}" >
+                        <div class="message rounded px-3 py-1 mb-2">
                             <span class="message_name">{{message.name}}</span>
                             <span class="message_text">{{message.text}}</span>
                         </div>
@@ -37,10 +37,15 @@ export default {
         userName: {
             type: String,
             required: true
+        },
+        userID: {
+            type: Number,
+            required: true
         }
     },
     methods: {
         sendMessage(text) {
+
             axios.post('/api/messages', {
                 user_hash: this.userToken,
                 room_hash: this.room,

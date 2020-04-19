@@ -17,7 +17,9 @@ class CrateMessagesTable extends Migration
             $table->id();
             $table->integer('from')->unsigned();
             $table->integer('toRoom')->unsigned();
-            $table->text('text');
+            $table->text('text')->nullable();
+            $table->integer('diceType')->unsigned()->nullable();
+            $table->integer('diceRoll')->unsigned()->nullable();
             $table->timestamps();
         });
     }

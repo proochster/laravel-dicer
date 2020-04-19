@@ -26,7 +26,7 @@ class MessageController extends Controller
         return DB::table('users')
         ->join('messages', 'messages.from', 'users.id')
         ->where('toRoom', $room->id)
-        ->select('from', 'name', 'text', 'messages.created_at' )
+        ->select('from', 'name', 'text', 'diceType', 'diceRoll', 'messages.created_at' )
         ->get();
 
     }
@@ -40,7 +40,9 @@ class MessageController extends Controller
         $message = Message::create([
             'from' => $user->id,
             'toRoom' => $room->id,
-            'text' => $request->text
+            'text' => $request->text,
+            'diceType' => $request->dice_type,
+            'diceRoll' => $request->dice_roll
         ]);
 
         // Send back User hash and name

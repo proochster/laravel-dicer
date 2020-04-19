@@ -8,7 +8,9 @@
 export default {
     data() {
         return {
-            message: ''
+            message: '',
+            // diceType: '',
+            // diceRoll: ''
         }
     },
     methods: {

@@ -12,6 +12,6 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'from', 'toRoom', 'text'
+        'from', 'toRoom', 'text', 'diceType', 'diceRoll'
     ];
 }

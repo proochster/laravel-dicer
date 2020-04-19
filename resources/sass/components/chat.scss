@@ -20,7 +20,8 @@
             text-align: right;
 
             .message{
-                background: $info;
+                background: $primary;
+                color: $light;
             }
         }
     }
@@ -40,6 +41,13 @@
     overflow-y: scroll;
 }
 
+// .diceset{
+//     display: flex;
+
+//     .dice{
+//         padding: 1rem;
+//     }
+// }
 // .composer{
     
 // }

@@ -46,6 +46,7 @@
             axios.get(`/api/room/${this.room_hash}/messages`)
                 .then(response => {
                     this.messages = response.data;
+                    console.log(this.messages);
                 });
            
         },
@@ -90,10 +91,10 @@
                 document.cookie = `diceroom_user_ID=${data.id}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
             },
 
-            saveNewMessage(m){
-                
+            saveNewMessage(m){                
                 this.messages.push(m);
             },
+            
             getCookieValue(cname){
                 var name = cname + "=";
                 var decodedCookie = decodeURIComponent(document.cookie);

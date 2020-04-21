@@ -14,6 +14,7 @@
 
         .message{
             background: $light;
+            position: relative;
         }
     
         &.self{
@@ -34,6 +35,26 @@
         font-size: .6rem;
         display: block;
     }
+
+    &_dice{
+        background-color: $primary;
+        color: $light;
+        font-size: 0.6rem;
+        position: absolute;
+        left: -12px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 0.5rem 0;
+        border-radius: 3px;
+        top: 12px;
+        transform: rotate(-20deg);
+    }
+
+    &_roll{
+        display: block;
+        text-align: right;
+    }
 }
 
 .scroll{
@@ -41,6 +62,34 @@
     overflow-y: scroll;
 }
 
+[data-d]{
+    border: 0;
+}
+
+[data-d="2"]{
+    background-color: $blue;
+}
+[data-d="4"]{
+    background-color: $indigo;
+}
+[data-d="6"]{
+    background-color: $purple;
+}
+[data-d="8"]{
+    background-color: $pink;
+}
+[data-d="10"]{
+    background-color: $red;
+}
+[data-d="12"]{
+    background-color: $orange;
+}
+[data-d="20"]{
+    background-color: $yellow;
+}
+[data-d="100"]{
+    background-color: $green;
+}
 // .diceset{
 //     display: flex;
 

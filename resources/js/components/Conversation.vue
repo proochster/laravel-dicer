@@ -3,13 +3,8 @@
         <div class="scroll" ref="scroll">
             <div class="scroll-content">
                 <ul class="mr-3">
-                    <li v-for="message in messages" :key="message.id" :class="{'self': userID == message.from}" >
-                        <div class="message rounded px-3 py-1 mb-2">
-                            <span class="message_name">{{message.name}}</span>
-                            <span v-if="message.text" class="message_text">{{message.text}}</span>
-                            <span v-if="message.diceType">{{message.diceType}}: </span>
-                            <span v-if="message.diceRoll" class="message_roll">{{message.diceRoll}}</span>
-                        </div>
+                    <li v-for="message in messages" :key="message.id" :class="[message.id, {'self': userID == message.from}]" >
+                        <Message :m="message" :key="message.id"></Message>
                     </li>
                 </ul>
             </div>
@@ -32,6 +27,7 @@
 <script>
 import Composer from "./Composer";
 import Dice from "./Dice";
+import Message from "./Message";
 
 export default {
     props: {
@@ -86,7 +82,7 @@ export default {
         }
     },
     components: {
-        Composer, Dice
+        Composer, Dice, Message
     }
 }
 </script>

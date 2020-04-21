@@ -1,5 +1,5 @@
 <template>
-    <div class="btn btn-primary dice" @click="rollRice">{{d}}</div>
+    <div class="btn btn-primary dice" :data-d="d" @click="rollRice">{{d}}</div>
 </template>
 
 <script>
@@ -12,7 +12,7 @@ export default {
     },
     data() {
         return {
-            message: '',
+            message: ''
         }
     },
     methods: {

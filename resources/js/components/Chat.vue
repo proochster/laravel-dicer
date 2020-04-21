@@ -46,7 +46,7 @@
             axios.get(`/api/room/${this.room_hash}/messages`)
                 .then(response => {
                     this.messages = response.data;
-                    console.log(this.messages);
+                    // console.log(this.messages);
                 });
            
         },

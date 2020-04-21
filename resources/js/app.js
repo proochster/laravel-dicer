@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 Vue.component('chat-box', require('./components/Chat.vue').default);
+Vue.component('link-box', require('./components/Links.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

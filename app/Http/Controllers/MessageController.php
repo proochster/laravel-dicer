@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
-    public function index()
-    {
-        $messages = Message::all();
+    // public function index()
+    // {
+    //     $messages = Message::all();
 
-        return response()->json($messages);
-    }
+    //     return response()->json($messages);
+    // }
     
     public function show($room_hash)
     {

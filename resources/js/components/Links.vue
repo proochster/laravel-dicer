@@ -1,29 +1,22 @@
 <template>
     <div class="links">
-        <div class="form-group">
-            <label for="url">Link address</label>
-            <input type="text" class="form-control" v-model="url" name="url" placeholder="https://link.com/to/asste">
-        </div>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" v-model="title" name="title" placeholder="Soundtrack 1">
-        </div>
-        <button @click="sendLink" type="submit" class="btn btn-success mb-2">Add</button>
-        <!-- <div class="modal fade show d-block" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add name</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" v-model="name" @keydown.enter="sendName" placeholder="Your name">
-                    </div>
-                </div>
-                </div>
+        <ul class="list-inline">
+            <li v-for="link in links" :key="link.id" >
+                <a :href="link.url" target="_blank" class="btn btn-outline-dark btn-sm d-block mb-1 text-capitalize text-left">{{link.title}}</a>
+            </li>
+        </ul>
+        <hr>
+        <div class="link-form row">
+            <div class="form-group col-6">
+                <label for="url">Link address</label>
+                <input type="text" class="form-control form-control-sm" v-model="url" name="url" placeholder="https://link.com/to/asste">
+            </div>
+            <div class="form-group col-6">
+                <label for="title">Title</label>
+                <input type="text" class="form-control form-control-sm" v-model="title" name="title" placeholder="Soundtrack 1">
             </div>
         </div>
-        <div class="modal-backdrop fade show"></div> -->
+        <button @click="sendLink" type="submit" class="btn btn-success btn-sm w-100">Add</button>
     </div>
 </template>
 
@@ -34,28 +27,34 @@ export default {
             type: String,
             required: true
         }
-        // messages: {
-        //     type: Array,
-        //     default: []
-        // },
-        // userToken: {
-        //     type: String,
-        //     required: true
-        // },
-        // userName: {
-        //     type: String,
-        //     required: true
-        // },
-        // userID: {
-        //     type: Number,
-        //     required: true
-        // }
     },
     data() {
         return {
             url: '',
-            title: ''
+            title: '',
+            links: []
         }
+    },
+
+    mounted() {
+
+        /**
+         * Listens on channel {room_hash}
+         */
+        window.Echo.channel(`room-channel.${this.room_hash}`)
+            .listen('NewLink', e => {
+                this.saveNewLink(e.link);
+            });
+
+        /**
+         * Gets all Links from Laravel API
+         */
+        axios.get(`/api/room/${this.room_hash}/links`)
+            .then(response => {
+                this.links = response.data;
+                // console.log(this.links);
+            });
+        
     },
     
     methods: {
@@ -81,7 +80,11 @@ export default {
             // Reset form
             this.url = '';
             this.title = "";
-        }
+        },
+        
+        saveNewLink(l){                
+            this.links.push(l);
+        },
     }
 }
 </script>

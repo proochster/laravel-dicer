@@ -4,7 +4,6 @@ namespace App\Events;
 
 use App\Link;
 use App\Room;
-use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewLink implements ShouldBroadcast
+class DestroyLink implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -38,7 +37,7 @@ class NewLink implements ShouldBroadcast
     {
         // Fetch Room the message was sent to
         $room = Room::where('id', $this->link->toRoom)->firstOrFail();
-        
+
         // Create a new Public Channel with Room hash in the name
         return new Channel('room-channel.'.$room->hash);
     }

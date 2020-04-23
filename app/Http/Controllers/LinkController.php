@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DestroyLink;
 use App\Events\NewLink;
 use Illuminate\Http\Request;
 use App\Link;
@@ -28,7 +29,7 @@ class LinkController extends Controller
         // ->join('links', 'links.from', 'users.id')
         ->where('toRoom', $room->id)
         // ->select('from', 'name', 'url', 'title', 'links.created_at' )
-        ->select('url', 'title', 'links.created_at' )
+        ->select('url', 'title', 'created_at', 'links.id' )
         ->get();
 
     }
@@ -52,5 +53,25 @@ class LinkController extends Controller
         NewLink::dispatch($link);
 
         return response()->json($link);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($room_hash, $id)
+    {
+        $room = Room::where('hash', $room_hash)->firstOrFail();
+
+        $link = Link::where('toRoom', $room->id)->where('id', $id)->firstOrFail();
+
+        // return $link;
+
+        DestroyLink::dispatch($link);   
+        
+        $link->delete();
+        // return response()->json($link);
     }
 }

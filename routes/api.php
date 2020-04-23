@@ -22,3 +22,4 @@ Route::post('/messages', 'MessageController@store');
 
 Route::get('/room/{room_hash}/links', 'LinkController@show');
 Route::post('/links', 'LinkController@store');
+Route::delete('/room/{room_hash}/link/{id}', 'LinkController@destroy');

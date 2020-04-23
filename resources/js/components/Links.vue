@@ -1,19 +1,17 @@
 <template>
     <div class="links">
         <ul class="list-inline">
-            <li v-for="link in links" :key="link.id" >
-                <a :href="link.url" target="_blank" class="btn btn-outline-dark btn-sm d-block mb-1 text-capitalize text-left">{{link.title}}</a>
+            <li v-for="link in links" :key="link.id" class="d-flex">
+                <a :href="link.url" target="_blank" class="btn btn-outline-secondary btn-sm flex-fill mb-1 text-capitalize text-left">{{link.title}}</a> <div class="btn btn-sm" @click="removeLink(link.id)">x</div>
             </li>
         </ul>
         <hr>
         <div class="link-form row">
             <div class="form-group col-6">
-                <label for="url">Link address</label>
-                <input type="text" class="form-control form-control-sm" v-model="url" name="url" placeholder="https://link.com/to/asste">
+                <input type="text" class="form-control form-control-sm" v-model="url" name="url" placeholder="URL address">
             </div>
             <div class="form-group col-6">
-                <label for="title">Title</label>
-                <input type="text" class="form-control form-control-sm" v-model="title" name="title" placeholder="Soundtrack 1">
+                <input type="text" class="form-control form-control-sm" v-model="title" name="title" placeholder="Title">
             </div>
         </div>
         <button @click="sendLink" type="submit" class="btn btn-success btn-sm w-100">Add</button>
@@ -44,6 +42,10 @@ export default {
         window.Echo.channel(`room-channel.${this.room_hash}`)
             .listen('NewLink', e => {
                 this.saveNewLink(e.link);
+            })
+            .listen('DestroyLink', e => {
+                let mappedIndex = this.links.map( l => l.id ).indexOf(e.link.id);
+                this.links.splice(mappedIndex, 1); 
             });
 
         /**
@@ -52,9 +54,7 @@ export default {
         axios.get(`/api/room/${this.room_hash}/links`)
             .then(response => {
                 this.links = response.data;
-                // console.log(this.links);
-            });
-        
+            });        
     },
     
     methods: {
@@ -81,9 +81,20 @@ export default {
             this.url = '';
             this.title = "";
         },
+
+        removeLink(itemID){
+
+            axios.delete(`/api/room/${this.room_hash}/link/${itemID}`)
+            .then(response => {
+
+            })
+            .catch(function (error) {         
+                console.log("Oh no! ", error);            
+            });
+        },
         
-        saveNewLink(l){                
-            this.links.push(l);
+        saveNewLink(l, i){                
+            this.links.push(l);            
         },
     }
 }

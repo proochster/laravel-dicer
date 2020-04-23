@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center" id="app">
-        <div class="col-md-6">
+        <div class="col-md-8 col-lg-6">
             <div class="card mt-4">
                 <div class="card-header">Welcome to <span class="font-weight-bold">{{ $room->name }}</span> room. Room address: <span class="text-success"><?php echo url()->current(); ?></span></div>
 

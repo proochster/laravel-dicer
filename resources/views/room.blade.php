@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h5 class="mt-4">Resources:</h5>            
+            <h5 class="mt-4">Links:</h5>            
             <link-box :room_hash="{{ json_encode($room->hash) }}"></link-box>
             {{-- <iframe src="https://discordapp.com/widget?id=700754598910099498&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe> --}}
         </div>

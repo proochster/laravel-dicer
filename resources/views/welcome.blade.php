@@ -7,7 +7,7 @@
         
         <p>Welcome to</p>
         <h1 class="display-4 text-primary">DiceChat</h1>
-        <p class="lead">A free online chatroom with rolling dice for you and your team.</p>
+        <p class="lead">A free online chatroom for rolling dice with your team.</p>
 
         <form class="form-inline" action="{{ route('create-room') }}" method="POST">
             @csrf

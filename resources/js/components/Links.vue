@@ -3,7 +3,8 @@
         <ul class="list-inline">
             <li v-for="link in links" :key="link.id" class="d-flex">
                 <a :href="link.url" target="_blank" class="btn btn-outline-secondary btn-sm flex-fill mb-1 text-capitalize text-left">{{link.title}}</a> <div class="btn btn-sm" @click="removeLink(link.id)">x</div>
-            </li>
+            </li>            
+            <li v-if="!links.length">Add first link below.</li>
         </ul>
         <hr>
         <div class="link-form row">

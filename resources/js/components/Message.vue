@@ -5,7 +5,7 @@
         <span v-if="m.diceType" class="message_dice text-info" :data-d="m.diceType">rolling D{{m.diceType}}</span>
         <div class="dice" v-if="m.diceRoll">
             <span class="message_roll">{{m.diceRoll}}</span>
-            <img :src="src" :alt="d" height="30">
+            <img :src="src" height="30">
         </div>
     </div>
 </template>

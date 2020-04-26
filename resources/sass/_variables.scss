@@ -36,6 +36,9 @@ $grays: map-merge(
 
 
 $primary: #1E4155;
+$primary-dark: #183444;
+$primary-darker: #142c3a;
+
 
 $blue:    #007bff !default;
 $indigo:  #6610f2 !default;
@@ -845,7 +848,7 @@ $card-cap-bg:                       rgba($black, .03) !default;
 $card-cap-color:                    null !default;
 $card-height:                       null !default;
 $card-color:                        null !default;
-$card-bg:                           $white !default;
+$card-bg:                           $primary-dark;
 
 $card-img-overlay-padding:          1.25rem !default;
 

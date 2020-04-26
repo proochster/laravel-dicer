@@ -13,7 +13,7 @@
         display: block;
 
         .message{
-            background: $light;
+            background: $primary-darker;
             position: relative;
         }
     
@@ -25,6 +25,21 @@
                 color: $light;
             }
         }
+    }
+
+    
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+        background: $primary-darker;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $primary;
     }
 }
 
@@ -63,7 +78,10 @@
 }
 
 [data-d]{
-    cursor: pointer;
+    
+    &:not(.message_dice){
+        cursor: pointer;
+    }
 
     &:hover{
         transform: translateY(-1rem);

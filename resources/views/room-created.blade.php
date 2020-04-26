@@ -12,7 +12,7 @@
                     <p>Share this url with your team</p>
                     <input type="text" class="bg-light form-control mb-2 mr-2 text-center" value="<?php echo url()->current(); ?>/{{ $room_hash }}">
                     <hr>
-                    <a href="<?php echo url()->current(); ?>/{{ $room_hash }}" class="btn btn-primary w-100">Go the room</a>
+                    <a href="<?php echo url()->current(); ?>/{{ $room_hash }}" class="btn btn-success w-100">Go the room</a>
                 </div>                
             </div>
         </div>

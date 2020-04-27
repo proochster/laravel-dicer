@@ -47,14 +47,14 @@
     display: inline-block;
 
     &_name{
-        font-size: .6rem;
+        font-size: .7rem;
         display: inline;
     }
 
     &_dice{
         // background-color: $primary;
         // color: $light;
-        font-size: 0.6rem;
+        font-size: 0.7rem;
         // position: absolute;
         // left: -12px;
         // width: 30px;
@@ -88,10 +88,10 @@
     }
 
     &:hover{
-        transform: translateY(-1rem);
+        transform: translateY(-.8rem);
 
         &:after{
-            transform: translateY(1rem) scale(.5);
+            transform: translateY(.8rem) scale(.5);
             opacity: .5;
         }
 

@@ -11,13 +11,13 @@
         </div>
         <div class="diceset">
             <!-- <Dice :d="2" @e-messagecomposed="sendMessage"></Dice> -->
-            <Dice :d="4" @e-messagecomposed="sendMessage"></Dice>
-            <Dice :d="6" @e-messagecomposed="sendMessage"></Dice>
+            <Dice :d="4" @e-messagecomposed="sendMessage" class="px-2"></Dice>
+            <Dice :d="6" @e-messagecomposed="sendMessage" class="px-2"></Dice>
             <!-- <Dice :d="8" @e-messagecomposed="sendMessage"></Dice> -->
-            <Dice :d="10" @e-messagecomposed="sendMessage"></Dice>
+            <Dice :d="10" @e-messagecomposed="sendMessage" class="px-2"></Dice>
             <!-- <Dice :d="12" @e-messagecomposed="sendMessage"></Dice> -->
             <!-- <Dice :d="20" @e-messagecomposed="sendMessage"></Dice> -->
-            <Dice :d="100" @e-messagecomposed="sendMessage"></Dice>
+            <Dice :d="100" @e-messagecomposed="sendMessage" class="px-2"></Dice>
         </div>
         <!-- <DiceSet @e-dicerolled="dice"></DiceSet> -->
         <Composer @e-messagecomposed="sendMessage"></Composer>

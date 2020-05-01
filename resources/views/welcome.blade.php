@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="container">
-    <small>v.0.0.2</small>
+    <small>v.0.0.4</small>
 </div>
 
 {{-- <div class="">

@@ -29,6 +29,9 @@
 
     </div>
 </div>
+<div class="container">
+    <small>v.0.0.2</small>
+</div>
 
 {{-- <div class="">
     <div class="container">

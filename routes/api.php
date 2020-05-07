@@ -23,3 +23,8 @@ Route::post('/messages', 'MessageController@store');
 Route::get('/room/{room_hash}/links', 'LinkController@show');
 Route::post('/links', 'LinkController@store');
 Route::delete('/room/{room_hash}/link/{id}', 'LinkController@destroy');
+
+Route::get('/room/{room_hash}/videos', 'VideoController@show');
+Route::post('/videos', 'VideoController@store');
+Route::delete('/room/{room_hash}/video/{id}', 'VideoController@destroy');
+Route::post('/room/{room_hash}/video/{id}', 'VideoController@state');

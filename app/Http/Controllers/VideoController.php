@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\DestroyVideo;
 use App\Events\NewVideo;
+use App\Events\PauseVideo;
 use App\Events\PlayVideo;
 use App\Room;
 use App\Video;
@@ -68,10 +69,10 @@ class VideoController extends Controller
         return;
     }
 
-    // public function pause($room_hash, $vUrl)
-    // {
+    public function pause($room_hash, $vUrl)
+    {
 
-    //     PauseVideo::dispatch($room_hash, $vUrl);
-    //     return;
-    // }
+        PauseVideo::dispatch($room_hash, $vUrl);
+        return;
+    }
 }

@@ -6,8 +6,9 @@
         </div>
 
         <ul class="list-inline">
-            <li v-for="video in videos" :key="video.id" class="d-flex align-items-center">
-                <a class="btn flex-fill text-capitalize text-info text-left" @click="sendPlayVideo(video.url)" title="Play this video in the room">{{video.title}}</a>
+            <li v-for="video in videos" :key="video.id" class="d-flex align-items-center mb-1">
+                <a class="btn flex-fill text-capitalize text-info text-left" :class="{ 'btn-outline-info shadow': video.url == selected }" @click="sendPlayVideo(video.url)" title="Play this video in the room">{{video.title}}</a>
+                <a class="btn btn-sm" @click="sendPauseVideo(video.url)" title="Pause this video">Pause</a>
                 <a class="btn btn-sm text-danger" @click="removeVideo(video.id)" title="Remove this video">x</a>
             </li>            
             <li v-if="!videos.length">Add first video.</li>
@@ -46,6 +47,7 @@ export default {
             videoId: '',
             videoTitle: '',
             hideVideo: true,
+            selected: undefined,
             videos: []
         }
     },
@@ -66,6 +68,10 @@ export default {
             .listen('PlayVideo', e => {
                 this.playVideo(e.videoUrl);
                 this.hideVideo = false;
+                this.selected = e.videoUrl;
+            })
+            .listen('PauseVideo', e => {
+                this.pauseVideo(e.videoUrl);
             });
 
         /**
@@ -119,10 +125,10 @@ export default {
             player.loadVideoById(vUrl, 1);
         }
 
-        // window.onPlayerStop = function() {
-        //     console.log('stop');
-        //     player.pauseVideo();
-        // }
+        window.onPlayerStop = function() {
+            // console.log('stop');
+            player.pauseVideo();
+        }
 
         // window.onLoadVideo = function() {
         //     console.log('Load new');
@@ -132,10 +138,6 @@ export default {
     },
     
     methods: {
-
-        // loadVideo(){
-        //     window.onLoadVideo();
-        // },
 
         sendPlayVideo(vUrl){
 
@@ -147,14 +149,25 @@ export default {
                     console.log("Oh no! ", error);            
                 });
         },
-        
+
         playVideo(vUrl){
             window.onPlayerStart(vUrl);
         },
 
-        // pauseVideo(){
-        //     window.onPlayerStop();
-        // },
+        sendPauseVideo(vUrl){
+
+            axios.post(`/api/room/${this.room_hash}/pause/${vUrl}`)
+                .then(response => {
+                    this.pauseVideo();
+                })
+                .catch(function (error) {         
+                    console.log("Oh no! ", error);            
+                });
+        },
+
+        pauseVideo(){
+            window.onPlayerStop();
+        },
 
         sendVideo() {
 

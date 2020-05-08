@@ -1,8 +1,9 @@
 <template>
     <div class="links">
         <ul class="list-inline">
-            <li v-for="link in links" :key="link.id" class="d-flex">
-                <a :href="link.url" target="_blank" class="flex-fill mb-1 text-capitalize text-info text-left">{{link.title}}</a> <div class="btn btn-sm text-danger" @click="removeLink(link.id)">x</div>
+            <li v-for="link in links" :key="link.id" class="d-flex align-items-center">
+                <a :href="link.url" target="_blank" class="flex-fill text-capitalize text-info text-left btn">{{link.title}}</a>
+                <a class="btn btn-sm text-danger" @click="removeLink(link.id)" title="Remove this link">x</a>
             </li>            
             <li v-if="!links.length">Add first link below.</li>
         </ul>
@@ -15,7 +16,7 @@
                 <input type="text" class="form-control form-control-sm" v-model="title" name="title" placeholder="Title">
             </div>
         </div>
-        <button @click="sendLink" type="submit" class="btn btn-success btn-sm w-100">Add</button>
+        <button @click="sendLink" type="submit" class="btn btn-success btn-sm w-100">Add Link</button>
     </div>
 </template>
 

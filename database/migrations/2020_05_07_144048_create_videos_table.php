@@ -17,6 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->integer('toRoom')->unsigned();
             $table->string('url');
+            $table->text('title');
             $table->timestamps();
         });
     }

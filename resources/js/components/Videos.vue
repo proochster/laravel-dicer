@@ -1,28 +1,35 @@
 <template>
     <div class="videos">
+
+        <div :class="{ 'd-none': hideVideo}" >
+            <div id="player" class="w-100"></div>
+        </div>
+
         <ul class="list-inline">
-            <li v-for="video in videos" :key="video.id" class="d-flex">
-                <a :href="video.url" target="_blank" class="flex-fill mb-1 text-capitalize text-info text-left">{{video.url}}</a>
-                <div class="btn btn-sm text-danger" @click="removeVideo(video.id)">x</div>
+            <li v-for="video in videos" :key="video.id" class="d-flex align-items-center">
+                <a class="btn flex-fill text-capitalize text-info text-left" @click="sendPlayVideo(video.url)" title="Play this video in the room">{{video.title}}</a>
+                <a class="btn btn-sm text-danger" @click="removeVideo(video.id)" title="Remove this video">x</a>
             </li>            
             <li v-if="!videos.length">Add first video.</li>
         </ul>
+            
         <hr>
+
+        <div class="video-guide small mb-4 text-white-50">
+            Use only the ID from the video URL. It's the last part of the address: <span class="text-monospace font-italic">https://www.youtube.com/watch?v=<span class="font-weight-bold text-light">abc123ABC456</span></span>
+        </div>
+
         <div class="link-form row">
             <div class="form-group col-6">
                 <input type="text" class="form-control form-control-sm" v-model="videoId" name="video_id" placeholder="Video ID">
             </div>
-            <div class="form-group col-6">
-                <button @click="sendVideo" type="submit" class="btn btn-success btn-sm w-100">Add</button>
+            <div class="form-group col-6">                
+                <input type="text" class="form-control form-control-sm" v-model="videoTitle" name="video_title" placeholder="Title">
             </div>
         </div>
-        
-        <!-- <div class="relative">
-            <div id="video-placeholder" class="w-100"></div>    
-        </div>
-        <button class="btn btn-danger" id="play" @click="playVideo">Play in room</button>
-        <button class="btn btn-danger" id="pause" @click="pauseVideo">Pause in room</button>
-        <button class="btn btn-danger" id="pause" @click="load">Load</button> -->
+
+        <button @click="sendVideo" type="submit" class="btn btn-success btn-sm w-100">Add Video</button>
+
     </div>
 </template>
 
@@ -37,6 +44,8 @@ export default {
     data() {
         return {
             videoId: '',
+            videoTitle: '',
+            hideVideo: true,
             videos: []
         }
     },
@@ -51,12 +60,16 @@ export default {
                 this.saveNewVideo(e.video);
             })
             .listen('DestroyVideo', e => {
-                let mappedIndex = this.videos.map( l => l.id ).indexOf(e.video.id);
+                let mappedIndex = this.videos.map( v => v.id ).indexOf(e.video.id);
                 this.videos.splice(mappedIndex, 1); 
+            })
+            .listen('PlayVideo', e => {
+                this.playVideo(e.videoUrl);
+                this.hideVideo = false;
             });
 
         /**
-         * Gets all Links from Laravel API
+         * Gets all Videos from Laravel API
          */
         axios.get(`/api/room/${this.room_hash}/videos`)
             .then(response => {
@@ -66,87 +79,78 @@ export default {
         /**
          * Setup YouTube player 
          */    
-        // var tag = document.createElement('script');
+        var tag = document.createElement('script');
 
-        // tag.src = "http://www.youtube.com/iframe_api";
-        // var firstScriptTag = document.getElementsByTagName('script')[0];
-        // firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        tag.src = "http://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // var player;
+        var player;
 
-        // window.onYouTubeIframeAPIReady = function() {
-        //     player = new YT.Player('video-placeholder', {
-        //         height: '100',
-        //         width: '300',
-        //         videoId: 'DQmHPEnmv4Q', // I need ID here.. this.id won't work
-        //         playerVars: {
-        //             color: 'white',
-        //             // controls: 0,
-        //             disablekb: 0,
-        //             loop: 1,
-        //             playlist: 'taJ60kskkns,FG0fTKAqZ5g',
-        //             modestbranding: 1
-        //         },
-        //         events: {
-        //             'onReady': window.onPlayerReady,
-        //             'onStateChange': window.onPlayerStateChange,
-        //             // 'onStop': window.onPlayerStop,
-        //             // 'onPlay': window.onPlayerStart
-        //         }
-        //     });
-        // }
+        // console.log(this.videos);
 
-        // window.onPlayerReady = function(event) {
-        //     // event.target.playVideo();
-        // }
+        window.onYouTubeIframeAPIReady = () => {
+            player = new YT.Player('player', {
+                height: '200',
+                width: '300',
+                // videoId: this.defaultVideo,
+                playerVars: {
+                    color: 'white',
+                    // controls: 0,
+                    disablekb: 0,
+                    loop: 1,
+                    // playlist: 'taJ60kskkns,FG0fTKAqZ5g',
+                    modestbranding: 1
+                },
+                events: {
+                    // 'onReady': window.onPlayerReady,
+                    // 'onStateChange': window.onPlayerStateChange
+                }
+            });
+
+        }
 
         // window.onPlayerStateChange = function(event) {
         //     // when video ends I need to emit notification to parent
         // }
 
-        // window.onPlayerStart = function() {
-        //     console.log('start');
-        //     player.playVideo();
-        // }
+        window.onPlayerStart = function(vUrl) {
+            // Play this video at 0 seconds
+            player.loadVideoById(vUrl, 1);
+        }
 
         // window.onPlayerStop = function() {
         //     console.log('stop');
         //     player.pauseVideo();
         // }
 
+        // window.onLoadVideo = function() {
+        //     console.log('Load new');
+        //     player.loadVideoById('ABSrtoNDYRk');
+        // }
+
     },
     
     methods: {
 
-        // load(){
-        // console.log('hello');
-        // window.onYouTubeIframeAPIReady = function() {
-        //     player = new YT.Player('video-placeholder', {
-        //         height: '200',
-        //         width: '300',
-        //         videoId: 'DQmHPEnmv4Q', // I need ID here.. this.id won't work
-        //         playerVars: {
-        //             color: 'white',
-        //             // controls: 0,
-        //             disablekb: 0,
-        //             loop: 1,
-        //             playlist: 'taJ60kskkns,FG0fTKAqZ5g',
-        //             modestbranding: 1
-        //         },
-        //         events: {
-        //             'onReady': window.onPlayerReady,
-        //             'onStateChange': window.onPlayerStateChange,
-        //             // 'onStop': window.onPlayerStop,
-        //             // 'onPlay': window.onPlayerStart
-        //         }
-        //     });
-        // }
-
+        // loadVideo(){
+        //     window.onLoadVideo();
         // },
 
-        // playVideo(){
-        //     window.onPlayerStart();
-        // },
+        sendPlayVideo(vUrl){
+
+            axios.post(`/api/room/${this.room_hash}/play/${vUrl}`)
+                .then(response => {
+                    this.playVideo(vUrl);
+                })
+                .catch(function (error) {         
+                    console.log("Oh no! ", error);            
+                });
+        },
+        
+        playVideo(vUrl){
+            window.onPlayerStart(vUrl);
+        },
 
         // pauseVideo(){
         //     window.onPlayerStop();
@@ -154,13 +158,14 @@ export default {
 
         sendVideo() {
 
-            if( this.url == '' ){
+            if( this.videoId == '' || this.videoTitle == "" ){
                 return;
             }
 
             axios.post('/api/videos', {
                 room_hash: this.room_hash,
                 url: this.videoId,
+                title: this.videoTitle
             })
             .then(response => {
                 // this.$emit('e-new', response.data);
@@ -171,6 +176,7 @@ export default {
 
             // Reset form
             this.videoId = '';
+            this.videoTitle = '';
         },
 
         removeVideo(itemID){
@@ -184,7 +190,7 @@ export default {
             });
         },
         
-        saveNewVideo(v, i){                
+        saveNewVideo(v){                
             this.videos.push(v);            
         },
     }

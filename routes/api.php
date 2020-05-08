@@ -27,4 +27,5 @@ Route::delete('/room/{room_hash}/link/{id}', 'LinkController@destroy');
 Route::get('/room/{room_hash}/videos', 'VideoController@show');
 Route::post('/videos', 'VideoController@store');
 Route::delete('/room/{room_hash}/video/{id}', 'VideoController@destroy');
-Route::post('/room/{room_hash}/video/{id}', 'VideoController@state');
+Route::post('/room/{room_hash}/play/{vUrl}', 'VideoController@play');
+// Route::post('/room/{room_hash}/pause/{vUrl}', 'VideoController@pause');

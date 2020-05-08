@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\DestroyVideo;
 use App\Events\NewVideo;
+use App\Events\PlayVideo;
 use App\Room;
 use App\Video;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class VideoController extends Controller
 
         return DB::table('videos')
         ->where('toRoom', $room->id)
-        ->select('url', 'created_at', 'videos.id' )
+        ->select('url', 'title', 'created_at', 'videos.id' )
         ->get();
 
     }
@@ -37,7 +38,8 @@ class VideoController extends Controller
         
         $video = Video::create([
             'toRoom' => $room->id,
-            'url' => $request->url
+            'url' => $request->url,
+            'title' => $request->title
         ]);
         
         NewVideo::dispatch($video);
@@ -58,4 +60,18 @@ class VideoController extends Controller
         
         $video->delete();
     }
+
+    public function play($room_hash, $vUrl)
+    {
+
+        PlayVideo::dispatch($room_hash, $vUrl);
+        return;
+    }
+
+    // public function pause($room_hash, $vUrl)
+    // {
+
+    //     PauseVideo::dispatch($room_hash, $vUrl);
+    //     return;
+    // }
 }

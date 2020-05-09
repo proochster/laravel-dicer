@@ -99,7 +99,6 @@ export default {
             player = new YT.Player('player', {
                 height: '200',
                 width: '300',
-                // videoId: this.defaultVideo,
                 playerVars: {
                     color: 'white',
                     // controls: 0,
@@ -116,25 +115,15 @@ export default {
 
         }
 
-        // window.onPlayerStateChange = function(event) {
-        //     // when video ends I need to emit notification to parent
-        // }
-
         window.onPlayerStart = function(vUrl) {
             // Play this video at 0 seconds
-            player.loadVideoById(vUrl, 1);
+            player.loadVideoById(vUrl, 0);
         }
 
         window.onPlayerStop = function() {
             // console.log('stop');
             player.pauseVideo();
         }
-
-        // window.onLoadVideo = function() {
-        //     console.log('Load new');
-        //     player.loadVideoById('ABSrtoNDYRk');
-        // }
-
     },
     
     methods: {
@@ -181,7 +170,6 @@ export default {
                 title: this.videoTitle
             })
             .then(response => {
-                // this.$emit('e-new', response.data);
             })
             .catch(function (error) {         
                 console.log(error);            

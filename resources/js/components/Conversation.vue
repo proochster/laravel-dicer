@@ -3,7 +3,7 @@
         <div class="scroll" ref="scroll">
             <div class="scroll-content">
                 <ul class="mr-3">
-                    <li v-for="message in messages" :key="message.id" :class="[message.id, {'self': userID == message.from}]" >
+                    <li v-for="message in latestMessages" :key="message.id" :class="[message.id, {'self': userID == message.from}]" >
                         <Message :m="message" :key="message.id"></Message>
                     </li>
                 </ul>
@@ -52,6 +52,11 @@ export default {
             required: true
         }
     },
+    data() {
+        return{
+            // latestMessages: [],
+        }
+    },
     methods: {
         sendMessage(text, diceType, diceRoll) {
             // console.log(text, diceType, diceRoll);
@@ -75,6 +80,11 @@ export default {
                 this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight - this.$refs.scroll.clientHeight;
             }, 50);
         },
+    },
+    computed: {
+        latestMessages(){
+            return this.messages.slice(Math.max( this.messages.length - 100, 1));
+        }
     },
     watch: {
         messages(messages){

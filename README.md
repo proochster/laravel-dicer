@@ -77,3 +77,25 @@ In the `/etc/apache2/sites-available/dicechat.tema.tools.conf` added:
     Require all granted
 </Directory>
 ```
+
+## Git hook
+
+Location: `/var/repo/hooks/dicechat.git/post-receive`
+``` sh
+#!/bin/sh
+# Transfer the files
+git --work-tree=/var/www/dicechat --git-dir=/var/repo/dicechat.git checkout -f
+# Maintenance mode on
+cd /var/www/dicechat
+php artisan down
+# Install Composer dependencies
+sudo composer install --no-dev
+# Install npm dependencies
+npm install --only=prod
+# Migrate DB
+php artisan migrate --force
+# Compile CSS and JS
+npm run prod
+# Turn the app online
+php artisan up
+```

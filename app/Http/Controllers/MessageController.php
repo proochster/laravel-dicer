@@ -11,17 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
-    // public function index()
-    // {
-    //     $messages = Message::all();
-
-    //     return response()->json($messages);
-    // }
     
-    public function show($room_hash)
+    public function show($roomHash)
     {
 
-        $room = Room::where('hash', $room_hash)->firstOrFail();
+        $room = Room::where('hash', $roomHash)->firstOrFail();
 
         return DB::table('users')
         ->join('messages', 'messages.from', 'users.id')
@@ -34,23 +28,20 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         
-        $user = User::where('hash', $request->user_hash)->firstOrFail();
-        $room = Room::where('hash', $request->room_hash)->firstOrFail();
+        $user = User::where('hash', $request->userHash)->firstOrFail();
+        $room = Room::where('hash', $request->roomHash)->firstOrFail();
         
         $message = Message::create([
             'from' => $user->id,
             'toRoom' => $room->id,
             'text' => $request->text,
-            'diceType' => $request->dice_type,
-            'diceRoll' => $request->dice_roll
+            'diceType' => $request->diceType,
+            'diceRoll' => $request->diceRoll
         ]);
 
-        // Send back User hash and name
-        $message->name = $user->name;
-        
-        NewMessage::dispatch($message);
-
-        return response()->json($message);
+        event(
+            (new NewMessage($message, $user->name, $request->roomHash))->dontBroadcastToCurrentUser()
+        );
     }
 }
 

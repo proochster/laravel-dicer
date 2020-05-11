@@ -3,7 +3,7 @@
         <div class="scroll" ref="scroll">
             <div class="scroll-content">
                 <ul class="mr-3">
-                    <li v-for="message in latestMessages" :key="message.id" :class="[message.id, {'self': userID == message.from}]" >
+                    <li v-for="message in messages" :key="message.id" :class="[message.id, {'self': userID == message.from}]" >
                         <Message :m="message" :key="message.id"></Message>
                     </li>
                 </ul>
@@ -19,7 +19,6 @@
             <!-- <Dice :d="20" @e-messagecomposed="sendMessage"></Dice> -->
             <Dice :d="100" @e-messagecomposed="sendMessage" class="px-2"></Dice>
         </div>
-        <!-- <DiceSet @e-dicerolled="dice"></DiceSet> -->
         <Composer @e-messagecomposed="sendMessage"></Composer>
     </div>
 </template>
@@ -52,21 +51,26 @@ export default {
             required: true
         }
     },
-    data() {
-        return{
-            // latestMessages: [],
-        }
-    },
+    
     methods: {
+        
         sendMessage(text, diceType, diceRoll) {
-            // console.log(text, diceType, diceRoll);
+
+            this.messages.push({
+                userHash: this.userToken,
+                text: text,
+                diceType: diceType,
+                diceRoll: diceRoll,
+                name: this.userName,
+                from: this.userID
+            });
 
             axios.post('/api/messages', {
-                user_hash: this.userToken,
-                room_hash: this.room,
+                userHash: this.userToken,
                 text: text,
-                dice_type: diceType,
-                dice_roll: diceRoll
+                diceType: diceType,
+                diceRoll: diceRoll,
+                roomHash: this.room
             })
             .then(response => {
                 // this.$emit('e-new', response.data);
@@ -81,16 +85,13 @@ export default {
             }, 50);
         },
     },
-    computed: {
-        latestMessages(){
-            return this.messages.slice(Math.max( this.messages.length - 100, 1));
-        }
-    },
+
     watch: {
         messages(messages){
             this.scrollToBottom();
         }
     },
+
     components: {
         Composer, Dice, Message
     }

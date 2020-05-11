@@ -26,6 +26,18 @@
                 userID: 0
             }
         },
+
+        created(){
+            /**
+             * Gets all messages from Laravel API
+             */
+            axios.get(`/api/room/${this.room_hash}/messages`)
+                .then(response => {
+                    // Limit the number of messgaes
+                    this.messages = response.data.slice(Math.max( response.data.length - 50, 1));
+                });
+        },
+
         mounted() {
 
             this.checkUser();
@@ -39,15 +51,16 @@
                 .listen('NewMessage', e => {
                     this.saveNewMessage(e.message);
                 });
-
-            /**
-             * Gets all messages from Laravel API
-             */
-            axios.get(`/api/room/${this.room_hash}/messages`)
-                .then(response => {
-                    this.messages = response.data;
-                    // console.log(this.messages);
-                });
+            // window.Echo.join(`room-channel.${this.room_hash}`)
+            //     .here((users) => {
+            //         console.log('present: ', users);
+            //     })
+            //     .joining((user) => {
+            //         console.log('joining: ', user);
+            //     })
+            //     .leaving((user) => {
+            //         console.log('leaving: ', user)
+            //     });
            
         },
 

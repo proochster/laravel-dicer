@@ -5,7 +5,7 @@
         <span v-if="m.diceType" class="message_dice text-info pr-2" :data-d="m.diceType">rolling D{{m.diceType}}</span>
         <div class="dice" v-if="m.diceRoll">
             <span class="message_roll">{{m.diceRoll}}</span>
-            <img :src="src" height="30">
+            <img :src="imageLink" height="30">
         </div>
     </div>
 </template>
@@ -18,18 +18,10 @@ export default {
             required: true
         }
     },
-    data() {
-        return {
-            src: ''
-        }
-    },
-    methods: {
+    computed: {
        imageLink(){
-           this.src = `/images/d${this.m.diceType}.svg`;
+           return `/images/d${this.m.diceType}.svg`;
        }
-    },
-    mounted() {
-        this.imageLink();
     }
 }
 </script>

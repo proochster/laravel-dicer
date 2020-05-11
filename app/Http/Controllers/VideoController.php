@@ -44,8 +44,6 @@ class VideoController extends Controller
         ]);
         
         NewVideo::dispatch($video);
-
-        return response()->json($video);
     }
 
     public function destroy($room_hash, $id)

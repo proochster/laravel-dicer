@@ -29,6 +29,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Preload images -->
+    <link rel="preload" href="{{ asset('images/d4.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d6.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d10.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d100.svg') }}" as="image">
 </head>
 <body>
     <div id="app">

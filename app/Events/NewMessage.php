@@ -2,9 +2,6 @@
 
 namespace App\Events;
 
-use App\Message;
-use App\Room;
-use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,21 +9,26 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Arr;
 
 class NewMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $from_name;
+    public $room_hash;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct($message, $from_name, $room_hash)
     {
         $this->message = $message;
+        $this->from_name = $from_name;
+        $this->room_hash = $room_hash;
     }
 
     /**
@@ -36,19 +38,14 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // Fetch Room the message was sent to
-        $room = Room::where('id', $this->message->toRoom)->firstOrFail();
-
         // Create a new Public Channel with Room hash in the name
-        return new Channel('room-channel.'.$room->hash);
+        return new Channel('room-channel.'.$this->room_hash);
     }
 
     public function broadcastWith()
     {
-
-        $user = User::where('id', $this->message->from)->firstOrFail();
-
-        $this->message->name = $user->name;
+        $this->message->name = $this->from_name;
+        $this->message = array_except($this->message, array('created_at', 'updated_at'));
 
         return [ "message" => $this->message ];
     }

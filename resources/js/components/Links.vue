@@ -36,6 +36,16 @@ export default {
         }
     },
 
+    created(){
+        /**
+         * Gets all Links from Laravel API
+         */
+        axios.get(`/api/room/${this.room_hash}/links`)
+            .then(response => {
+                this.links = response.data;
+            });    
+    },
+
     mounted() {
 
         /**
@@ -48,15 +58,7 @@ export default {
             .listen('DestroyLink', e => {
                 let mappedIndex = this.links.map( l => l.id ).indexOf(e.link.id);
                 this.links.splice(mappedIndex, 1); 
-            });
-
-        /**
-         * Gets all Links from Laravel API
-         */
-        axios.get(`/api/room/${this.room_hash}/links`)
-            .then(response => {
-                this.links = response.data;
-            });        
+            });    
     },
     
     methods: {
@@ -66,7 +68,7 @@ export default {
             if( this.url == '' || this.title == "" ){
                 return;
             }
-
+            
             axios.post('/api/links', {
                 room_hash: this.room_hash,
                 url: this.url,

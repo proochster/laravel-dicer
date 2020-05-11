@@ -26,9 +26,7 @@ class LinkController extends Controller
         $room = Room::where('hash', $room_hash)->firstOrFail();
 
         return DB::table('links')
-        // ->join('links', 'links.from', 'users.id')
         ->where('toRoom', $room->id)
-        // ->select('from', 'name', 'url', 'title', 'links.created_at' )
         ->select('url', 'title', 'created_at', 'links.id' )
         ->get();
 
@@ -36,20 +34,14 @@ class LinkController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
-        // $user = User::where('hash', $request->user_hash)->firstOrFail();
         $room = Room::where('hash', $request->room_hash)->firstOrFail();
         
         $link = Link::create([
-            // 'from' => $user->id,
             'toRoom' => $room->id,
             'url' => $request->url,
             'title' => $request->title
         ]);
 
-        // Send back User hash and name
-        // $link->name = $user->name;
-        
         NewLink::dispatch($link);
 
         return response()->json($link);
@@ -67,11 +59,8 @@ class LinkController extends Controller
 
         $link = Link::where('toRoom', $room->id)->where('id', $id)->firstOrFail();
 
-        // return $link;
-
         DestroyLink::dispatch($link);   
         
         $link->delete();
-        // return response()->json($link);
     }
 }

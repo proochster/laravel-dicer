@@ -66,6 +66,16 @@ export default {
         }
     },
 
+    created() {
+        /**
+         * Gets all Videos from Laravel API
+         */
+        axios.get(`/api/room/${this.room_hash}/videos`)
+            .then(response => {
+                this.videos = response.data;
+            });   
+    },
+
     mounted() {
 
         /**
@@ -88,14 +98,6 @@ export default {
                 this.pauseVideo(e.videoUrl);
                 this.selected = undefined;
             });
-
-        /**
-         * Gets all Videos from Laravel API
-         */
-        axios.get(`/api/room/${this.room_hash}/videos`)
-            .then(response => {
-                this.videos = response.data;
-            });   
 
         /**
          * Setup YouTube player 

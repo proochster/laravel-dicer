@@ -1,7 +1,7 @@
 <template>
-    <div class="dice" :data-d="d" @click="rollRice">
+    <div class="dice" :data-d="d" @click="rollDice">
         <span>{{d}}</span>
-        <img :src="src" :alt="d" height="50">
+        <img :src="imageLink" :alt="d" height="50">
     </div>
 </template>
 
@@ -15,23 +15,22 @@ export default {
     },
     data() {
         return {
-            message: '',
-            src: ''
+            message: ''
         }
     },
+
+    computed: {
+       imageLink(){
+           return `/images/d${this.d}.svg`;
+       }
+    },
+
     methods: {
-       rollRice(){
+       rollDice(){
 
         let roll = 1 + Math.floor(Math.random()*this.d);        
         this.$emit('e-messagecomposed', this.message, this.d, roll );
-       },
-
-       imageLink(){
-           this.src = `/images/d${this.d}.svg`;
        }
-    },
-    mounted() {
-        this.imageLink();
     }
 }
 </script>

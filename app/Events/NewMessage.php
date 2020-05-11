@@ -29,6 +29,8 @@ class NewMessage implements ShouldBroadcast
         $this->message = $message;
         $this->from_name = $from_name;
         $this->room_hash = $room_hash;
+
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**

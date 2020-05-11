@@ -39,9 +39,7 @@ class MessageController extends Controller
             'diceRoll' => $request->diceRoll
         ]);
 
-        event(
-            (new NewMessage($message, $user->name, $request->roomHash))->dontBroadcastToCurrentUser()
-        );
+        event( new NewMessage($message, $user->name, $request->roomHash));
     }
 }
 

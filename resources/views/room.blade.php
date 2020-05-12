@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('pageTitle'){{ $room->name }}@endsection
+
 @section('content')
 <div class="px-4">
     <div class="row" id="app">

@@ -45,23 +45,12 @@
             /**
              * Listens on channel {room_hash}
              * 
-             * Returns: id, from, toRoom, text, created_at, updated_at, name
+             * Returns: id, from, toRoom, text, name
              */
             window.Echo.channel(`room-channel.${this.room_hash}`)
                 .listen('NewMessage', e => {
                     this.saveNewMessage(e.message);
-                });
-            // window.Echo.join(`room-channel.${this.room_hash}`)
-            //     .here((users) => {
-            //         console.log('present: ', users);
-            //     })
-            //     .joining((user) => {
-            //         console.log('joining: ', user);
-            //     })
-            //     .leaving((user) => {
-            //         console.log('leaving: ', user)
-            //     });
-           
+                });           
         },
 
         methods: {

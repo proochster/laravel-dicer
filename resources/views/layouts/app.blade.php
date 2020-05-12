@@ -20,7 +20,7 @@
     </script>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,7 +28,7 @@
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <!-- Preload images -->
     <link rel="preload" href="{{ asset('images/d4.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d6.svg') }}" as="image">

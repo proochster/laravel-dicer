@@ -17,8 +17,8 @@
         </div>
 
         <ul class="list-inline">
-            <li v-for="video in videos" :key="video.id" class="d-flex align-items-center mb-1">
-                <a v-if="video.url != selected" class="btn flex-fill text-capitalize text-info text-left" @click="sendPlayVideo(video.url)" title="Play this video in the room">
+            <li v-for="(video, index) in videos" :key="video.id" class="d-flex align-items-center mb-1">
+                <a v-if="video.url != selected" class="btn flex-fill text-capitalize text-info text-left" @click="sendPlayVideo(video.url), currentVideo = index" title="Play this video in the room">
                      <img src="/images/icon-play.svg" class="pr-1" alt="Play" height="12">
                     {{video.title}}
                 </a>
@@ -31,8 +31,6 @@
         </ul>
             
         <hr>
-
-
 
         <div class="link-form row">
             <div class="form-group col-6">
@@ -62,6 +60,7 @@ export default {
             videoTitle: '',
             hideVideo: true,
             selected: undefined,
+            currentVideo: 0,
             videos: []
         }
     },
@@ -126,11 +125,23 @@ export default {
                 },
                 events: {
                     // 'onReady': window.onPlayerReady,
-                    // 'onStateChange': window.onPlayerStateChange
+                    'onStateChange': window.onPlayerStateChange
                 }
             });
 
         }
+
+        window.onPlayerStateChange = (state) => {
+
+            // Finished playing
+            if(state.data === 0){
+
+                // Next video or loop to start of the video list
+                this.currentVideo++ < this.videos ? this.currentVideo++ : this.currentVideo = 0;
+                this.selected = this.videos[this.currentVideo]['url'];
+                player.loadVideoById(this.selected, 0);
+            }
+        },
 
         window.onPlayerStart = function(vUrl) {
             // Play this video at 0 seconds

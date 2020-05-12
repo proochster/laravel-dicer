@@ -137,7 +137,7 @@ export default {
             if(state.data === 0){
 
                 // Next video or loop to start of the video list
-                this.currentVideo++ < this.videos ? this.currentVideo++ : this.currentVideo = 0;
+                this.currentVideo < this.videos.length -1 ? this.currentVideo++ : this.currentVideo = 0;
                 this.selected = this.videos[this.currentVideo]['url'];
                 player.loadVideoById(this.selected, 0);
             }

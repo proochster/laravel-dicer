@@ -14,8 +14,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-xl-8 row">
-            <div class="col-12 col-lg-6 col-xl-4 pt-4">   
+        <div class="col-12 col-md-6 col-xl-8 row position-static">
+            <div class="col-12 col-lg-6 col-xl-4 pt-4 position-static">   
                 <video-box :room_hash="{{ json_encode($room->hash) }}"></video-box> 
             </div>
             <div class="col-12 col-lg-6 col-xl-4 pt-4">

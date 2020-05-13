@@ -1,7 +1,7 @@
 <template>
     <div class="videos">
 
-        <div :class="{ 'd-none': hideVideo}" >
+        <div :class="{ 'd-none': hideVideo, 'full-screen': videoSize}" >
             <div id="player" class="w-100"></div>
         </div>
         
@@ -13,6 +13,13 @@
                 Use only the ID from the video URL. <br>
                 It's the last part of the address: <br>
                 <span class="text-monospace font-italic">https://www.youtube.com/watch?v=<span class="font-weight-bold text-light">abc123ABC456</span></span>
+            </div>
+        </div>
+
+        <div v-if="!hideVideo" class="card mb-2">
+            <div class="card-body p-2">
+                <a v-if="!videoSize" @click="fullScreen" class="btn btn-primary btn-sm" title="Full screen"><img src="/images/icon-full-screen.svg" alt="Full screen" height="16"></a>
+                <a v-if="videoSize" @click="smallScreen" class="btn btn-primary btn-sm" title="Exit full screen"><img src="/images/icon-small-screen.svg" alt="Exit full screen" height="16"></a>
             </div>
         </div>
 
@@ -47,6 +54,7 @@
 </template>
 
 <script>
+
 export default {
     props: {
         room_hash:{
@@ -61,6 +69,7 @@ export default {
             hideVideo: true,
             selected: undefined,
             currentVideo: 0,
+            videoSize: 0,
             videos: []
         }
     },
@@ -96,6 +105,9 @@ export default {
             .listen('PauseVideo', e => {
                 this.pauseVideo(e.videoUrl);
                 this.selected = undefined;
+            })
+            .listen('PlayerStatus', e => {
+                this.videoSize = e.playerStatus;
             });
 
         /**
@@ -121,7 +133,11 @@ export default {
                     disablekb: 0,
                     loop: 1,
                     // playlist: 'taJ60kskkns,FG0fTKAqZ5g',
-                    modestbranding: 1
+                    modestbranding: 1,
+                    fs: 0,
+                    autoplay: 0,
+                    cc_lang_pref: 0,
+                    showinfo: 0
                 },
                 events: {
                     // 'onReady': window.onPlayerReady,
@@ -222,6 +238,29 @@ export default {
         saveNewVideo(v){                
             this.videos.push(v);            
         },
+
+        fullScreen() {
+            this.videoSize = 1;
+            this.sendPlayerStatus();
+        },
+
+        smallScreen() {
+            this.videoSize = 0;
+            this.sendPlayerStatus();
+        },
+
+        sendPlayerStatus(){
+
+            axios.post(`/api/room/${this.room_hash}/player`, {
+                videoSize: this.videoSize
+            })
+            .then(response => {
+                // console.log(response);
+            })
+            .catch(function (error) {         
+                console.log(error);            
+            });
+        }
     }
 }
 </script>

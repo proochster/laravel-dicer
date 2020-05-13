@@ -29,3 +29,4 @@ Route::post('/videos', 'VideoController@store');
 Route::delete('/room/{room_hash}/video/{id}', 'VideoController@destroy');
 Route::post('/room/{room_hash}/play/{vUrl}', 'VideoController@play');
 Route::post('/room/{room_hash}/pause/{vUrl}', 'VideoController@pause');
+Route::post('/room/{room_hash}/player', 'VideoController@player');

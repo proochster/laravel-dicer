@@ -37,7 +37,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container justify-content-center">
                 <a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'Laravel') }}">
                     <img src="{{ asset('images/dicechat_logo.svg') }}" alt="{{ config('app.name', 'Laravel') }}" height="40">

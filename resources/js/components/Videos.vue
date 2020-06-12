@@ -10,9 +10,7 @@
                 <h5 class="mb-0">Videos</h5>
             </div>
             <div class="card-footer">
-                Use only the ID from the video URL. <br>
-                It's the last part of the address: <br>
-                <span class="text-monospace font-italic">https://www.youtube.com/watch?v=<span class="font-weight-bold text-light">abc123ABC456</span></span>
+                Simply copy YouTube video URL from the address bar, paste it in the field below and add a fancy title. 
             </div>
         </div>
 
@@ -41,7 +39,7 @@
 
         <div class="link-form row">
             <div class="form-group col-6">
-                <input type="text" class="form-control form-control-sm" v-model="videoId" name="video_id" placeholder="Video ID">
+                <input type="text" class="form-control form-control-sm" v-model="videoAddress" name="video_id" placeholder="Video address">
             </div>
             <div class="form-group col-6">                
                 <input type="text" class="form-control form-control-sm" v-model="videoTitle" name="video_title" placeholder="Title">
@@ -64,7 +62,7 @@ export default {
     },
     data() {
         return {
-            videoId: '',
+            videoAddress: '',
             videoTitle: '',
             hideVideo: true,
             selected: undefined,
@@ -204,13 +202,23 @@ export default {
 
         sendVideo() {
 
-            if( this.videoId == '' || this.videoTitle == "" ){
+            if( this.videoAddress == '' || this.videoTitle == "" ){
                 return;
             }
 
+            // Get only video ID
+            var videoId = this.videoAddress.split('v=')[1];
+            var ampersandPosition = videoId.indexOf('&');
+            if(ampersandPosition != -1) {
+                videoId = videoId.substring(0, ampersandPosition);
+            }
+
+            // Strip out special characters
+            videoId.replace(/[^a-zA-Z ]/g, "");
+
             axios.post('/api/videos', {
                 room_hash: this.room_hash,
-                url: this.videoId,
+                url: videoId,
                 title: this.videoTitle
             })
             .then(response => {

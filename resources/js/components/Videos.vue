@@ -228,7 +228,7 @@ export default {
             });
 
             // Reset form
-            this.videoId = '';
+            this.videoAddress = '';
             this.videoTitle = '';
         },
 

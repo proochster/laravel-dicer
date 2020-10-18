@@ -18,17 +18,19 @@ class NewMessage implements ShouldBroadcast
     public $message;
     public $from_name;
     public $room_hash;
+    public $dice_rolls;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $from_name, $room_hash)
+    public function __construct($message, $from_name, $room_hash, $dice_rolls)
     {
         $this->message = $message;
         $this->from_name = $from_name;
         $this->room_hash = $room_hash;
+        $this->dice_rolls = $dice_rolls;
 
         $this->dontBroadcastToCurrentUser();
     }
@@ -47,6 +49,7 @@ class NewMessage implements ShouldBroadcast
     public function broadcastWith()
     {
         $this->message->name = $this->from_name;
+        $this->message->dice_rolls = $this->dice_rolls;
         $this->message = array_except($this->message, array('created_at', 'updated_at'));
 
         return [ "message" => $this->message ];

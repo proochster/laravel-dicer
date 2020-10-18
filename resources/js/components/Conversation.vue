@@ -54,14 +54,33 @@ export default {
     
     methods: {
         
-        sendMessage(text, diceType, diceRoll) {
+        sendMessage(text, diceType, diceArray) {
+
+            // console.log(text, diceType, diceArray);
+
+            // console.log(diceArray);
+            // let rolls = [];
+            let rolls_roll = [];
+
+            if (diceArray != undefined){
+                // for (let i = 0; i < diceArray.length; i++) {
+                //     rolls[i] = diceArray[i];
+                // }
+                
+                for (let i = 0; i < diceArray.length; i++) {
+                    rolls_roll[i] = {'dice_roll':diceArray[i]};
+                }
+            }
 
             this.messages.push({
                 userHash: this.userToken,
                 text: text,
                 diceType: diceType,
-                diceRoll: diceRoll,
-                name: this.userName,
+                // diceRoll: diceRoll,
+                dice_rolls: rolls_roll,
+                user:{
+                    name: this.userName,
+                },
                 from: this.userID
             });
 
@@ -69,7 +88,8 @@ export default {
                 userHash: this.userToken,
                 text: text,
                 diceType: diceType,
-                diceRoll: diceRoll,
+                // diceRoll: diceRoll,
+                dice_rolls: rolls_roll,
                 roomHash: this.room
             })
             .then(response => {
@@ -94,6 +114,6 @@ export default {
 
     components: {
         Composer, Dice, Message
-    }
+    },
 }
 </script>

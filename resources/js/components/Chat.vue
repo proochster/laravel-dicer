@@ -35,6 +35,7 @@
                 .then(response => {
                     // Limit the number of messgaes
                     this.messages = response.data.slice(Math.max( response.data.length - 50, 1));
+                    console.log(this.messages);
                 });
         },
 
@@ -49,6 +50,7 @@
              */
             window.Echo.channel(`room-channel.${this.room_hash}`)
                 .listen('NewMessage', e => {
+                    // console.log('MEssage: ', e.message);
                     this.saveNewMessage(e.message);
                 });           
         },

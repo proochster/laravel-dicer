@@ -14,4 +14,14 @@ class Message extends Model
     protected $fillable = [
         'from', 'toRoom', 'text', 'diceType', 'diceRoll'
     ];
+
+    public function diceRolls()
+    {
+        return $this->hasMany(DiceRoll::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'from');
+    }
 }

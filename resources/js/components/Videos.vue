@@ -159,7 +159,8 @@ export default {
 
         window.onPlayerStart = function(vUrl) {
             // Play this video at 0 seconds
-            player.loadVideoById(vUrl, 0);
+            // player;
+            player.loadVideoById(vUrl).seekTo(0);
         }
 
         window.onPlayerStop = function() {

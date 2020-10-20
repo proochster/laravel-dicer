@@ -2,14 +2,17 @@
     <div class="message rounded px-3 py-1 mb-2 mx-3">
         <span class="message_name">{{m.user.name}}</span>
         <span v-if="m.text" class="message_text">{{m.text}}</span>
-        <span v-if="m.diceType" class="message_dice text-info pr-2" :data-d="m.diceType">rolling D{{m.diceType}} x {{m.dice_rolls.length}}</span>
+        <span v-if="m.diceType" class="message_dice text-white-50" :data-d="m.diceType"> D{{m.diceType}}</span>
         <div class="dice" v-if="m.dice_rolls">
             <img v-if="m.diceType" :src="imageLink" height="30">
-            <ul v-if="m.dice_rolls.length > 1" class="rolls">
-                <li class="roll" v-for="(roll, index) in m.dice_rolls" :key="index">{{roll.dice_roll}}</li>
-            </ul>
-            <span class="rolls-sum">{{sum}}</span>
+            <span v-if="m.dice_rolls.length > 0">
+                <span class="small text-white-50 pr-2"> x {{m.dice_rolls.length}} </span>
+                <span class="rolls-sum">{{sum}}</span>
+            </span>
         </div>
+        <ul v-if="m.dice_rolls.length > 1" class="rolls text-info text-monospace">
+            <li class="roll" v-for="(roll, index) in m.dice_rolls" :key="index">{{roll.dice_roll}}</li>
+        </ul>
     </div>
 </template>
 

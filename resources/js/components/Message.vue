@@ -4,9 +4,9 @@
         <span v-if="m.text" class="message_text">{{m.text}}</span>
         <span v-if="m.diceType" class="message_dice text-white-50" :data-d="m.diceType"> D{{m.diceType}}</span>
         <div class="dice" v-if="m.dice_rolls">
-            <img v-if="m.diceType" :src="imageLink" height="30">
-            <span v-if="m.dice_rolls.length > 0">
-                <span class="small text-white-50 pr-2"> x {{m.dice_rolls.length}} </span>
+            <span v-if="m.dice_rolls.length > 0" class="small text-white-50 pr-2"> x {{m.dice_rolls.length}} </span>
+            <span v-if="m.dice_rolls.length > 0" class="dice-image">
+                <img v-if="m.diceType" :src="imageLink" height="30">
                 <span class="rolls-sum">{{sum}}</span>
             </span>
         </div>

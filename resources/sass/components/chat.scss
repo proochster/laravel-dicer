@@ -63,6 +63,18 @@
     &_text{
         display: block;
     }
+
+    .dice-image{
+        position: relative;
+
+        .rolls-sum{
+            position: absolute;
+            margin-left: -50%;
+            transform: translateX(-50%);
+            top: 0;
+            text-shadow: -1px -1px $primary;
+        }
+    }
 }
 
 .scroll{

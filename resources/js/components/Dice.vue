@@ -1,7 +1,7 @@
 <template>
-    <div class="dice-menu" :data-d="d">
+    <div class="dice-menu px-1" :data-d="d">
         <picture class="dice-button" @click="rollDice(1)">
-            <img :src="imageLink" :alt="d" height="50">
+            <img :src="imageLink" :alt="d" height="40">
             <span>{{d}}</span>
         </picture>
         <ul class="dice-rolls">

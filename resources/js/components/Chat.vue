@@ -35,7 +35,6 @@
                 .then(response => {
                     // Limit the number of messgaes
                     this.messages = response.data.slice(Math.max( response.data.length - 50, 1));
-                    console.log(this.messages);
                 });
         },
 

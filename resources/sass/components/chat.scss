@@ -97,6 +97,29 @@
 .dice{
     padding: 0.5rem 0;
     display: inline;
+
+    [data-class='crit-win'],
+    [data-class='crit-fail']{
+        filter: drop-shadow(0 0 6px red);
+        position: relative;
+
+        &:after{
+            position: absolute;
+            display: block;
+            top: -5px;
+            right: -100%;
+            color: white;
+            font-family: monospace;
+            transform: rotate(-16deg);
+        }
+    }
+
+    [data-class='crit-win']:after{        
+        content: "SNAP!";
+    }
+    [data-class='crit-fail']:after{        
+        content: "SHIT!";
+    }
 }
 
 .videos{

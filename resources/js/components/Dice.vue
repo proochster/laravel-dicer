@@ -26,6 +26,7 @@ export default {
             required: true
         }
     },
+
     data() {
         return {
             message: ''
@@ -41,15 +42,11 @@ export default {
     methods: {
         rollDice(count){
             let diceArray = [];
-            
+
             for (var i = 1; i <= count; i++) {
                 let d = 1 + Math.floor(Math.random()*this.d);
                 diceArray.push(d);
-                console.log('Count ++ : ' + i);
             }
-                console.log('Count: ' + count);
-            // let roll = 1 + Math.floor(Math.random()*this.d);
-            
 
             this.$emit('e-messagecomposed', this.message, this.d, diceArray );
         }

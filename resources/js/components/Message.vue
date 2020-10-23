@@ -5,7 +5,7 @@
         <span v-if="m.diceType" class="message_dice text-white-50" :data-d="m.diceType"> D{{m.diceType}}</span>
         <div class="dice" v-if="m.dice_rolls">
             <span v-if="m.dice_rolls.length > 0" class="small text-white-50 pr-2"> x {{m.dice_rolls.length}} </span>
-            <span v-if="m.dice_rolls.length > 0" class="dice-image">
+            <span v-if="m.dice_rolls.length > 0" :data-class="crit" class="dice-image">
                 <img v-if="m.diceType" :src="imageLink" height="30">
                 <span class="rolls-sum">{{sum}}</span>
             </span>
@@ -34,6 +34,17 @@ export default {
                 roll_sum += this.m.dice_rolls[i]['dice_roll'];
             }
             return roll_sum;
+       },
+       crit(){
+            let dice_class = '';
+
+            if(this.m.dice_rolls.length == 1){
+
+                if( this.m.dice_rolls[0].dice_roll == 1 ) dice_class = 'crit-fail';
+                else if( this.m.dice_rolls[0].dice_roll == this.m.diceType ) dice_class = 'crit-win';
+                return dice_class;
+
+            }
        }
     },
 }

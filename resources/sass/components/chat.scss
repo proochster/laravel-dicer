@@ -100,25 +100,36 @@
 
     [data-class='crit-win'],
     [data-class='crit-fail']{
-        filter: drop-shadow(0 0 6px red);
         position: relative;
 
         &:after{
             position: absolute;
             display: block;
             top: -5px;
-            right: -100%;
+            left: 100%;
             color: white;
             font-family: monospace;
             transform: rotate(-16deg);
+            font-style: italic;
+            text-align: left;
+            line-height: 1;
         }
     }
 
-    [data-class='crit-win']:after{        
-        content: "SNAP!";
+    [data-class='crit-win']{
+        filter: drop-shadow(0 0 6px white);
+
+        &:after{        
+            content: " HELL YES!";
+        }
     }
-    [data-class='crit-fail']:after{        
-        content: "SHIT!";
+
+    [data-class='crit-fail']{
+        filter: drop-shadow(0 0 6px black);
+
+        &:after{        
+            content: " OH SHIT!";
+        }
     }
 }
 

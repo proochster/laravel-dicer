@@ -62,6 +62,8 @@
 
     &_text{
         display: block;
+        word-break: break-all;
+        text-align: left;
     }
 
     .dice-image{

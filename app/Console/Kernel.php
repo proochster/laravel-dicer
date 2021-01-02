@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('clean:db')->everyMinute();
-        // $schedule->command('messages:clear-old')->dailyAt('23:55');
+        $schedule->command('clean:db')->dailyAt('03:55');
     }
 
     /**

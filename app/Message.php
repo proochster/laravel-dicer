@@ -24,4 +24,13 @@ class Message extends Model
     {
         return $this->belongsTo(User::class, 'from');
     }
+
+    public static function boot() {
+        parent::boot();
+        self::deleting(function($message) {
+                $message->diceRolls()->each(function($diceRoll) {
+                    $diceRoll->delete();
+                });
+        });
+    }
 }

@@ -99,3 +99,11 @@ npm run prod
 # Turn the app online
 php artisan up
 ```
+
+## SSL certificate
+
+To extend the certificate run this command in the root:
+```
+sudo ./certbot-auto certonly --webroot -w /var/www/dicechat/ -d dicechat.team.tools -d www.dicechat.team.
+tools
+```

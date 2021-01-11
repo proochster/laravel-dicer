@@ -104,6 +104,6 @@ php artisan up
 
 To extend the certificate run this command in the root:
 ```
-sudo ./certbot-auto certonly --webroot -w /var/www/dicechat/ -d dicechat.team.tools -d www.dicechat.team.
+sudo ./certbot-auto certonly --webroot -w /var/www/dicechat/public/ -d dicechat.team.tools -d www.dicechat.team.
 tools
 ```

@@ -94,7 +94,9 @@
                 document.cookie = `diceroom_user_ID=${data.id}; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/;`;
             },
 
-            saveNewMessage(m){                
+            saveNewMessage(m){
+                
+                // console.log('MEssage: ', m);
                 this.messages.push(m);
             },
             

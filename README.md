@@ -107,3 +107,70 @@ To extend the certificate run this command in the root:
 sudo ./certbot-auto certonly --webroot -w /var/www/dicechat/public/ -d dicechat.team.tools -d www.dicechat.team.
 tools
 ```
+
+## Server maintenance
+
+### File size maintenance
+
+List size of top folders
+```
+sudo du -shc /*
+```
+
+List size of all folders including subfolders
+```
+sudo du -sh /*
+```
+
+Snaps files can pile up and take a significant amount of space.
+Run this to check the snaps size:
+```
+sudo du -shc /var/lib/snapd/snaps/*
+```
+Read more here: https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html
+
+    "There is a snap option (starting with snapd version 2.34), called refresh.retain, to set the maximum number of a snap's revisions stored by the system after the next refresh, which can be set to a number between 2 and 20"
+
+Set kept snaps to 2. This step was already applied.
+```
+sudo snap set system refresh.retain=2
+```
+STEPS TO RUN
+
+**Remove unused packages**
+
+```
+sudo apt-get autoremove
+```
+or with the ```-f``` flag if if the previous command didn't work:
+```
+sudo apt-get -f autoremove
+```
+**Remove unused snaps**
+
+Snaps locations:
+
+/snap/ /var/snap/ /var/lib/snapd/ /home/username/snap/
+
+List all snaps
+```
+snap list --all
+```
+
+Remove old snaps using a custom script located in ```./clean_snap.sh```
+```
+sudo ./clean_snap.sh
+```
+
+## Logs size
+
+You can check the log size with this command:
+
+```
+journalctl --disk-usage
+```
+
+Logs location:
+```
+/var/log
+```

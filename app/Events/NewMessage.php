@@ -19,18 +19,20 @@ class NewMessage implements ShouldBroadcast
     public $from_name;
     public $room_hash;
     public $dice_rolls;
+    public $message_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $from_name, $room_hash, $dice_rolls)
+    public function __construct($message, $from_name, $room_hash, $dice_rolls, $message_id)
     {
         $this->message = $message;
         $this->from_name = $from_name;
         $this->room_hash = $room_hash;
         $this->dice_rolls = $dice_rolls;
+        $this->message_id = $message_id;
 
         $this->dontBroadcastToCurrentUser();
     }

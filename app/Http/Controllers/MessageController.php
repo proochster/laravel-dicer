@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Message;
 use App\Room;
 use App\User;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -83,8 +83,6 @@ class MessageController extends Controller
             }
         }
 
-        event( new NewMessage($message, $message->user->name, $request->roomHash, $request->dice_rolls));
+        event( new NewMessage($message, $message->user->name, $request->roomHash, $request->dice_rolls, $message->id));
     }
 }
-
-

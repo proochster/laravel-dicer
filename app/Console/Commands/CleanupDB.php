@@ -44,11 +44,11 @@ class CleanupDB extends Command
 
         $rooms = Room::all();
 
-        error_log($rooms->count() . " rooms to check:");
+        // error_log($rooms->count() . " rooms to check:");
         Log::info($rooms->count() . " rooms to check:");
 
         $rooms->each(function($r) {            
-            error_log("Room ID: ". $r->id . "\t Name: " . $r->name . "\t  Hash: " . $r->hash);
+            // error_log("Room ID: ". $r->id . "\t Name: " . $r->name . "\t  Hash: " . $r->hash);
             Log::info("Room ID: ". $r->id . "\t Name: " . $r->name . "\t  Hash: " . $r->hash);
             
             $messages = Message::latest()->where('toRoom', $r->id)->get();
@@ -70,8 +70,8 @@ class CleanupDB extends Command
 
             }
             
-            error_log("Messages: " . $mCount . " | " . $mCountMessage);
-            error_log("\n");
+            // error_log("Messages: " . $mCount . " | " . $mCountMessage);
+            // error_log("\n");
             Log::info("Messages: " . $mCount . " | " . $mCountMessage);
             
         });

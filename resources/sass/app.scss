@@ -47,3 +47,17 @@
 
 // Components
 @import 'components/chat';
+
+body{
+    background-color: #292929;
+    box-shadow: inset 1px 1px 20px 20px #00000029;
+    height: 100vh;
+}
+
+.text-accent{
+    color: #ff7600 !important;
+}
+
+.text-accent-light{
+    color: #ffbe86 !important;
+}

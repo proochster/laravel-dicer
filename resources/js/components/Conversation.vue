@@ -15,7 +15,7 @@
             <Dice :d="6" @e-messagecomposed="sendMessage"></Dice>
             <Dice :d="8" @e-messagecomposed="sendMessage"></Dice>
             <Dice :d="10" @e-messagecomposed="sendMessage"></Dice>
-            <!-- <Dice :d="12" @e-messagecomposed="sendMessage"></Dice> -->
+            <Dice :d="12" @e-messagecomposed="sendMessage"></Dice>
             <!-- <Dice :d="20" @e-messagecomposed="sendMessage"></Dice> -->
             <Dice :d="100" @e-messagecomposed="sendMessage"></Dice>
         </div>
@@ -83,7 +83,10 @@ export default {
                 },
                 from: this.userID
             });
+            
+            // console.log('Pushed message locally');
 
+            // console.log('Sent message');
             axios.post('/api/messages', {
                 userHash: this.userToken,
                 text: text,
@@ -93,7 +96,8 @@ export default {
                 roomHash: this.room
             })
             .then(response => {
-                // this.$emit('e-new', response.data);
+                // this.$emit('e-new', response.data);                
+                // console.log('Message saved. Server responded' + response);
             })
             .catch(function (error) {         
                 console.log(error);            

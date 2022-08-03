@@ -4,13 +4,13 @@
         <span v-if="m.text" class="message_text">{{m.text}}</span>
         <span v-if="m.diceType" class="message_dice text-white-50" :data-d="m.diceType"> D{{m.diceType}}</span>
         <div class="dice" v-if="m.dice_rolls">
-            <span v-if="m.dice_rolls.length > 0" class="small text-white-50 pr-2"> x {{m.dice_rolls.length}} </span>
+            <span v-if="m.dice_rolls.length > 1" class="small text-accent pr-2"> x {{m.dice_rolls.length}} </span>
             <span v-if="m.dice_rolls.length > 0" :data-class="crit" class="dice-image">
                 <img v-if="m.diceType" :src="imageLink" height="30">
                 <span class="rolls-sum">{{sum}}</span>
             </span>
         </div>
-        <ul v-if="m.dice_rolls.length > 1" class="rolls text-info text-monospace">
+        <ul v-if="m.dice_rolls.length > 1" class="rolls text-accent-light text-monospace">
             <li class="roll" v-for="(roll, index) in m.dice_rolls" :key="index">{{roll.dice_roll}}</li>
         </ul>
     </div>

@@ -1,0 +1,457 @@
+/*
+* Chat
+*/
+
+.conversation{
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        justify-content: right;
+    }
+
+    li{
+        display: block;
+
+        .message{
+            // background: #131313;
+            outline: 2px solid $primary-light;
+            position: relative;
+            border: 3px double $accent;
+            border-radius: 0 !important;
+        }
+    
+        &.self{
+            text-align: right;
+
+            .message{
+                // background: $primary;
+                color: $primary !important;
+            }
+        }
+    }
+
+    
+    /* width */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: $primary;
+    }
+}
+
+.message{
+    display: inline-block;
+
+    &_name{
+        // font-size: .7rem;
+        display: inline;
+        font-weight: 700;
+        padding-right: 0.3rem;
+    }
+
+    &_dice{
+        font-size: 0.9rem;
+        color: $accent !important;
+    }
+
+    &_roll{
+        display: block;
+        text-align: right;
+    }
+
+    &_text{
+        display: block;
+        word-break: break-all;
+        text-align: left;
+    }
+
+    .dice-image{
+        position: relative;
+
+        img{
+            opacity: 0;
+        }
+
+        .rolls-sum{
+            position: absolute;
+            margin-left: -50%;
+            transform: translateX(-50%);
+            top: 0;
+            color: $body-bg;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+.scroll{
+    height: calc(100vh - 360px);
+    overflow-y: scroll;
+}
+
+[data-d]{
+    
+    &:not(.message_dice){
+        cursor: pointer;
+    }
+
+    img{
+        opacity: 0;
+    }
+}
+
+.diceset{
+    display: flex;
+    flex-flow: wrap;
+}
+
+.dice{
+    padding: 0.5rem 0;
+    display: inline;
+
+    // [data-class='crit-win'],
+    // [data-class='crit-fail']{
+    //     position: relative;
+
+    //     &:after{
+    //         position: absolute;
+    //         display: block;
+    //         top: -5px;
+    //         left: 100%;
+    //         color: white;
+    //         font-family: monospace;
+    //         transform: rotate(-16deg);
+    //         font-style: italic;
+    //         text-align: left;
+    //         line-height: 1;
+    //     }
+    // }
+
+    // [data-class='crit-win']{
+    //     filter: drop-shadow(0 0 6px white);
+
+    //     &:after{        
+    //         content: " HELL YES!";
+    //     }
+    // }
+
+    // [data-class='crit-fail']{
+    //     filter: drop-shadow(0 0 6px black);
+
+    //     &:after{        
+    //         content: " OH SHIT!";
+    //     }
+    // }
+}
+
+.videos{
+
+    .full-screen{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+
+        #player{
+            width: 100%;
+            height: 100%; 
+        }
+    }
+
+    li a.flex-fill{
+
+        border-radius: 0 !important;
+
+        img{
+    
+            opacity: 0;
+        }
+
+        &:before{
+            content: '>';
+            color: $accent;
+            display: block;
+            position: absolute;
+        }
+
+        &.shadow{
+
+            box-shadow: none !important;
+
+            &:before{
+                content: '=';
+            }
+        }
+    }
+}
+
+.rolls{
+    display: flex;
+    font-size: 12px;
+
+    .roll{
+
+        font-family: $font-family-sans-serif;
+        font-weight: 700;
+
+        &:after{
+            content: '+';
+            padding: 0 2px;
+        }
+
+        &:last-child:after{
+            content: '';
+        }
+    }
+}
+
+.dice-menu{
+
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms;
+
+    img{
+        transition:
+            transform 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms;
+        position: relative;
+        z-index: 1;
+    }
+
+    &:hover{
+        transform: translateY(-.8rem);
+        z-index: 1;
+
+        img{
+            transform: rotate(20deg); 
+        }
+
+        .dice-rolls{
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    .dice-rolls{
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        background: $body-bg;
+        left: 0;
+        right: 0;
+        padding: 10px 0 30px 0 !important;
+        margin: 0 -10px;
+        pointer-events: none;
+        opacity: 0;
+        border: 5px double $primary-light;
+        transition:
+            opacity 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms;
+
+        li{
+            position: relative;
+            transition:
+                transform 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms;
+
+            &:before{
+                content: '';
+                width: 20px;
+                height: 14px;
+                display: block;
+                position: absolute;
+                top: 6px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                transform: translateX(-4px);
+                opacity: 0;
+                transition:
+                    transform 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms,
+                    opacity 0.3s cubic-bezier(0.3, 0.2, 0.4, 1) 0ms;
+            }
+
+            &:hover{
+                transform: scale(1.3);
+
+                &:before{
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+        }
+    }
+}
+
+// [data-d="4"] .dice-rolls li:before {background-image: url('/images/d4.svg')}
+[data-d="6"] .dice-rolls li:before {background-image: url('/images/d6_1.svg')}
+// [data-d="8"] .dice-rolls li:before {background-image: url('/images/d8.svg')}
+// [data-d="10"] .dice-rolls li:before {background-image: url('/images/d10.svg')}
+[data-d="12"] .dice-rolls li:before {background-image: url('/images/d12_1.svg')}
+// [data-d="100"] .dice-rolls li:before {background-image: url('/images/d100.svg')}
+
+[data-d="4"],
+[data-d="8"],
+[data-d="10"],
+[data-d="100"]{
+    display: none;
+}
+
+[data-d="6"] picture,
+[data-d="12"] picture{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+[data-d="6"] picture{
+    background-image: url('/images/d6_1.svg');
+}
+
+[data-d="12"] picture{
+    background-image: url('/images/d12_1.svg');
+}
+
+.dice-button{
+    span{
+        color: $body-bg;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+        position: absolute;
+        font-size: 1.6rem;
+    }
+}
+
+.dicetype_6{
+
+    .d_6{
+
+        position: relative;
+        margin: 0 2px 0 8px;
+        
+        &:before{
+
+            content: '';
+            display: block;
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 1px solid $accent;
+            top: 2px;
+            left: -5px;
+            transform: rotate(45deg);
+        }
+
+        &:after{
+            padding-left: 9px !important;
+        }
+    }
+
+    .dice-image{
+        background-image: url('/images/d6_1.svg');
+    }
+}
+
+.dicetype_12{
+
+    .dice-image{
+        
+        background-image: url('/images/d12_1.svg');
+    }    
+}
+    
+.dice-image{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    position: relative;
+}
+
+/**
+    Crits
+*/
+
+.dicetype_12{
+    
+    .diceroll_12{
+        
+        position: relative;
+
+        span{
+            display: none;
+        }
+
+        &:after{
+            content: "G";
+            display: block;
+            position: absolute;
+            color: #ffffff;
+            font-size: 1.8rem;
+            top: 1px;
+            line-height: 1;
+            left: 9px;
+            text-shadow: 0px 0px 7px white;
+            mix-blend-mode: normal;   
+         }
+    }
+
+    .diceroll_11{
+        
+        position: relative;
+
+        span{
+            display: none;
+        }
+
+        &:after{
+            content: "<o>";
+            display: block;
+            position: absolute;
+            color: #ffffff;
+            font-size: 1.1rem;
+            top: 5px;
+            line-height: 1;
+            left: 5px;
+            text-shadow: 0px 0px 7px black;
+            mix-blend-mode: normal;
+         }
+    }
+}
+
+.navbar{
+
+    &-brand{
+
+        position: relative;
+        background-image: url('/images/dicechat_logo_1.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        img{
+            opacity: 0;
+        }
+    }
+}

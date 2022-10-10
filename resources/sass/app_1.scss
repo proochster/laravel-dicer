@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
 
 // Variables
 
@@ -7,7 +7,7 @@
 // Bootstrap
 
 @import "~bootstrap/scss/functions";
-@import 'variables'; // @import "~bootstrap/scss/variables";
+@import 'variables_1'; // @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
@@ -25,7 +25,7 @@
 @import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/nav";
 @import "~bootstrap/scss/navbar";
-@import "card"; // @import "~bootstrap/scss/card";
+@import "card_1"; // @import "~bootstrap/scss/card";
 // @import "~bootstrap/scss/breadcrumb";
 // @import "~bootstrap/scss/pagination";
 // @import "~bootstrap/scss/badge";
@@ -46,18 +46,21 @@
 // @import '~bootstrap/scss/bootstrap';
 
 // Components
-@import 'components/chat';
+@import 'components/chat_1';
 
 body{
-    background-color: #292929;
-    box-shadow: inset 1px 1px 20px 20px #00000029;
+    box-shadow: inset 1px 1px 60px 40px #0000000d;
     height: 100vh;
 }
 
 .text-accent{
-    color: #ff7600 !important;
+    color: $accent!important;
 }
 
 .text-accent-light{
-    color: #ffbe86 !important;
+    color: $accent!important;
+}
+
+.text-white-50{
+    color: $primary !important;
 }

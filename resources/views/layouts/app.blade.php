@@ -22,30 +22,38 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
 
     <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app_0.css') }}" rel="stylesheet">
+    {{-- <link href="" rel="stylesheet"> --}}
     <!-- Preload images -->
     <link rel="preload" href="{{ asset('images/d4.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d6.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d8.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d10.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d12.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d100.svg') }}" as="image">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-            <div class="container justify-content-center">
-                <a class="navbar-brand" href="{{ url('/') }}" title="{{ config('app.name', 'Laravel') }}">
+    <div>
+        <nav class="navbar">
+
+            <div class="navbar-brand navbar-start">
+                <a class="navbar-item" href="{{ url('/') }}" title="{{ config('app.name', 'Laravel') }}">
                     <img src="{{ asset('images/dicechat_logo.svg') }}" alt="{{ config('app.name', 'Laravel') }}" height="40">
                 </a>
             </div>
+
+            <div class="navbar-item navbar-end">
+                <select name="theme" id="theme_selector">
+                    <option value="0">Default</option>
+                    <option value="1">One Ring</option>
+                </select>
+            </div>
         </nav>
 
-        <main class="">
+        <main class="container-fluid">
             @yield('content')
         </main>
     </div>

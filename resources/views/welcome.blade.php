@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="jumbotron rounded-0 text-center bg-info">
+<div class="jumbotron rounded-0 text-center bg-transparent">
     <div class="w-50-md mx-auto">
         
         <p>Welcome to</p>

@@ -9,7 +9,7 @@
             <div class="card-header">
                 <h5 class="mb-0">Videos</h5>
             </div>
-            <div class="card-footer">
+            <div class="card-body">
                 Simply copy YouTube video URL from the address bar, paste it in the field below and add a fancy title. 
             </div>
         </div>

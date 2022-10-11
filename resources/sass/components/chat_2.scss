@@ -17,7 +17,8 @@
             position: relative;
             border: 3px double $primary;
             border-radius: 0 !important;
-            color: $accent;
+            color: $primary;
+            background-color: $accent;
         }
     
         &.self{
@@ -52,8 +53,8 @@
     &_name{
         // font-size: .7rem;
         display: inline;
-        font-weight: 700;
         padding-right: 0.3rem;
+        color: #1c1c1c;
     }
 
     &_dice{
@@ -87,6 +88,10 @@
             color: $body-bg;
             font-size: 1.3rem;
         }
+    }
+
+    .text-accent{
+        color: #1c1c1c !important;
     }
 }
 
@@ -202,11 +207,11 @@
 .rolls{
     display: flex;
     font-size: 12px;
-
+    
     .roll{
-
+        
+        color: $primary !important;
         font-family: $font-family-sans-serif;
-        font-weight: 700;
 
         &:after{
             content: '+';
@@ -356,7 +361,7 @@
             position: absolute;
             width: 14px;
             height: 14px;
-            border: 1px solid $accent;
+            border: 1px solid $primary;
             top: 2px;
             left: -5px;
             transform: rotate(45deg);
@@ -403,15 +408,15 @@
         }
 
         &:after{
-            content: "G";
+            content: "-G-";
             display: block;
             position: absolute;
-            color: #ffffff;
-            font-size: 1.8rem;
-            top: 1px;
+            color: $accent;
+            font-size: 1.3rem;
+            top: 5px;
             line-height: 1;
-            left: 9px;
-            text-shadow: 0px 0px 7px white;
+            left: 3px;
+            // text-shadow: 0px 0px 7px white;
             mix-blend-mode: normal;   
          }
     }
@@ -428,12 +433,12 @@
             content: "<o>";
             display: block;
             position: absolute;
-            color: #ffffff;
-            font-size: 1.1rem;
-            top: 5px;
+            color: $accent;
+            font-size: 1.3rem;
+            top: 4px;
             line-height: 1;
-            left: 5px;
-            text-shadow: 0px 0px 7px black;
+            left: 3px;
+            // text-shadow: 0px 0px 7px black;
             mix-blend-mode: normal;
          }
     }

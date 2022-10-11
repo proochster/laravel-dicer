@@ -404,15 +404,15 @@
         }
 
         &:after{
-            content: "G";
+            content: "-G-";
             display: block;
             position: absolute;
-            color: #ffffff;
-            font-size: 1.8rem;
-            top: 1px;
+            color: $body-bg;
+            font-size: 1.3rem;
+            top: 5px;
             line-height: 1;
-            left: 9px;
-            text-shadow: 0px 0px 7px white;
+            left: 3px;
+            // text-shadow: 0px 0px 7px white;
             mix-blend-mode: normal;   
          }
     }
@@ -429,12 +429,12 @@
             content: "<o>";
             display: block;
             position: absolute;
-            color: #ffffff;
-            font-size: 1.1rem;
-            top: 5px;
+            color: $body-bg;
+            font-size: 1.3rem;
+            top: 4px;
             line-height: 1;
-            left: 5px;
-            text-shadow: 0px 0px 7px black;
+            left: 3px;
+            // text-shadow: 0px 0px 7px black;
             mix-blend-mode: normal;
          }
     }

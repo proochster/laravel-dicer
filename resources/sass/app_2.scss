@@ -1,0 +1,67 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+// Variables
+
+
+// Bootstrap
+
+@import "~bootstrap/scss/functions";
+@import 'variables_2'; // @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// @import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "card_2"; // @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/breadcrumb";
+// @import "~bootstrap/scss/pagination";
+// @import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/media";
+// @import "~bootstrap/scss/list-group";
+// @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/carousel";
+// @import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/utilities";
+// @import "~bootstrap/scss/print";
+// @import '~bootstrap/scss/bootstrap';
+
+// Components
+@import 'components/chat_2';
+
+body{
+    box-shadow: inset 1px 1px 60px 40px #0000000d;
+    height: 100vh;
+    background-color: #1c1c1c !important;
+}
+
+.text-accent{
+    color: $accent!important;
+}
+
+.text-accent-light{
+    color: $accent!important;
+}
+
+.text-white-50{
+    color: $primary !important;
+}

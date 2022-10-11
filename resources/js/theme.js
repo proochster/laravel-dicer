@@ -22,7 +22,4 @@
         var link = document.querySelector('link[rel="stylesheet"]');
         link.href = `/css/app_${theme_id}.css`;
     }
-
-
-
 })();

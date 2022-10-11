@@ -6,7 +6,7 @@
     <div class="w-50-md mx-auto">
         
         <p>Welcome to</p>
-        <h1 class="display-4 text-primary">DiceChat</h1>
+        <h1 class="display-4 text-accent">DiceChat</h1>
         <p class="lead">A free online chatroom for rolling dice with your team.</p>
 
         <form class="form-inline" action="{{ route('create-room') }}" method="POST">

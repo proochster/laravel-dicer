@@ -48,7 +48,8 @@
             <div class="navbar-item navbar-end">
                 <select name="theme" id="theme_selector">
                     <option value="0">Default</option>
-                    <option value="1">One Ring</option>
+                    <option value="1">One Ring - Light</option>
+                    <option value="2">One Ring - Dark</option>
                 </select>
             </div>
         </nav>

@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use App\Models\Room;
-use App\Models\Video;
+use App\Room;
+use App\Video;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;

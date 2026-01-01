@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DiceRoll;
+use App\Models\DiceRoll;
 use App\Events\NewMessage;
 use Illuminate\Http\Request;
-use App\Message;
-use App\Room;
-use App\User;
+use App\Models\Message;
+use App\Models\Room;
+use App\Models\User;
 // use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
@@ -26,8 +26,7 @@ class MessageController extends Controller
         // ->select('from', 'name', 'text', 'diceType', 'diceRoll', 'messages.created_at' );
         $get_messages = Message::with('diceRolls', 'user')        
         // ->select('from', 'text', 'diceType', 'messages.created_at' )
-        ->where('toRoom', $room->id)
-        ;
+        ->where('toRoom', $room->id);
         // ->select('id');
         
 

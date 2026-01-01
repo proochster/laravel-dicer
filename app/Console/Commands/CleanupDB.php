@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use App\Room;
-use App\Message;
+use App\Models\Room;
+use App\Models\Message;
 
 class CleanupDB extends Command
 {

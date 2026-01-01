@@ -1,21 +1,37 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Message;
-use App\User;
-use App\Room;
-use Faker\Generator as Faker;
+use App\Models\Message;
+use App\Models\User;
+use App\Models\Room;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Message::class, function (Faker $faker) {
+class MessageFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Message::class;
 
-    do {
-        $from = User::all()->random()->id;
-        $toRoom = Room::all()->random()->id;
-    } while ( $from === $toRoom );
-    return [
-        'from' => $from,
-        'toRoom' => $toRoom,
-        'text' => $faker->sentence,
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        do {
+            $from = User::all()->random()->id;
+            $toRoom = Room::all()->random()->id;
+        } while ( $from === $toRoom );
+        
+        return [
+            'from' => $from,
+            'toRoom' => $toRoom,
+            'text' => $this->faker->sentence,
+        ];
+    }
+}

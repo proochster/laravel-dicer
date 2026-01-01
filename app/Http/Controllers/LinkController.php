@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Events\DestroyLink;
 use App\Events\NewLink;
 use Illuminate\Http\Request;
-use App\Link;
-use App\Room;
-use App\User;
+use App\Models\Link;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 

@@ -1,13 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Room;
-use Faker\Generator as Faker;
+use App\Models\Room;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(Room::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        'hash' => Str::random(6)
-    ];
-});
+class RoomFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Room::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->word,
+            'hash' => Str::random(6)
+        ];
+    }
+}

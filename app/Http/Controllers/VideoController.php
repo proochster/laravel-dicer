@@ -7,8 +7,8 @@ use App\Events\NewVideo;
 use App\Events\PauseVideo;
 use App\Events\PlayerStatus;
 use App\Events\PlayVideo;
-use App\Room;
-use App\Video;
+use App\Models\Room;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

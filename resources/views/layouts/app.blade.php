@@ -28,11 +28,13 @@
     <link href="{{ mix('css/app_0.css') }}" rel="stylesheet">
     {{-- <link href="" rel="stylesheet"> --}}
     <!-- Preload images -->
+    <link rel="preload" href="{{ asset('images/d2.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d4.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d6.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d8.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d10.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d12.svg') }}" as="image">
+    <link rel="preload" href="{{ asset('images/d20.svg') }}" as="image">
     <link rel="preload" href="{{ asset('images/d100.svg') }}" as="image">
 </head>
 <body>

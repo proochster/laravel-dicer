@@ -33,10 +33,4 @@
     <small>v.0.0.7</small>
 </div>
 
-{{-- <div class="">
-    <div class="container">
-        <p class="text-white">text</p>
-    </div>
-</div> --}}
-
 @endsection

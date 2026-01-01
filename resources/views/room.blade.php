@@ -3,15 +3,11 @@
 @section('pageTitle'){{ $room->name }}@endsection
 
 @section('content')
-<div class="">
+<div>
     <div class="row" id="app">
         <div class="col-12 col-md-6 col-xl-4">
             <div class="card">
-                <div class="card-header"><span class="text-capitalize text-info">{{ $room->name }}</span></div>
-
-                <div class="card-body">
-                    <chat-box :room_hash="{{ json_encode($room->hash) }}"></chat-box>
-                </div>
+                <chat-box :room_hash="{{ json_encode($room->hash) }}" :room_name="{{ json_encode($room->name) }}"></chat-box>
             </div>
         </div>
         <div class="col-12 col-md-6 col-xl-8 row position-static">

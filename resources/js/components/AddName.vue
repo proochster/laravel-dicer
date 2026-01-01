@@ -35,9 +35,15 @@
 
 <script>
 export default {
+    props: {
+        userName: {
+            type: String,
+            default: ""
+        }
+    },
     data() {
         return {
-            name: ""
+            name: this.userName || ""
         };
     },
     methods: {
